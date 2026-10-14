@@ -21,7 +21,6 @@ class MstBanner extends Model
 
     protected $fillable = [
         'KodeBanner',
-        'IDTravel',
         'Keterangan1',
         'Keterangan2',
         'Gambar',
@@ -31,7 +30,6 @@ class MstBanner extends Model
     protected $columnOrder = [
         null,
         'Gambar',
-        'msttravel.NamaTravel',
         'Keterangan1',
         'Keterangan2',
         'IsAktif'
@@ -40,8 +38,7 @@ class MstBanner extends Model
     protected $columnSearch = [
         'KodeBanner',
         'Keterangan1',
-        'Keterangan2',
-        'msttravel.NamaTravel'
+        'Keterangan2'
     ];
 
     protected $defaultOrder = [
@@ -51,20 +48,7 @@ class MstBanner extends Model
     public function getDatatablesQuery()
     {
         $query = DB::table('mstbanner')
-            ->leftJoin('msttravel', 'msttravel.IDTravel', '=', 'mstbanner.IDTravel')
-            ->select('mstbanner.*', 'msttravel.NamaTravel');
-
-        $user = Auth::user();
-        if ($user && (int)$user->LevelID === 2) {
-            $query->where('mstbanner.IDTravel', $user->IDTravel);
-        } elseif ($user && (int)$user->LevelID === 1) {
-            $filterTravel = request('IDTravel');
-            if ($filterTravel === 'haromain') {
-                $query->whereNull('mstbanner.IDTravel');
-            } elseif (!empty($filterTravel)) {
-                $query->where('mstbanner.IDTravel', $filterTravel);
-            }
-        }
+            ->select('mstbanner.*');
 
         if (!empty(request('search.value'))) {
             $query->where(function ($q) {
@@ -97,17 +81,6 @@ class MstBanner extends Model
 
     public function countAll()
     {
-        $user = Auth::user();
-        if ($user && (int)$user->LevelID === 2) {
-            return DB::table('mstbanner')->where('IDTravel', $user->IDTravel)->count();
-        } elseif ($user && (int)$user->LevelID === 1) {
-            $filterTravel = request('IDTravel');
-            if ($filterTravel === 'haromain') {
-                return DB::table('mstbanner')->whereNull('IDTravel')->count();
-            } elseif (!empty($filterTravel)) {
-                return DB::table('mstbanner')->where('IDTravel', $filterTravel)->count();
-            }
-        }
         return DB::table('mstbanner')->count();
     }
 
@@ -122,17 +95,8 @@ class MstBanner extends Model
 
     public static function getLandingBanner()
     {
-        $banners = self::where('IsAktif', 1)
-            ->whereNull('IDTravel')
+        return self::where('IsAktif', 1)
             ->get()
             ->toArray();
-
-        if (empty($banners)) {
-            $banners = self::where('IsAktif', 1)
-                ->get()
-                ->toArray();
-        }
-
-        return $banners;
     }
 }
