@@ -114,12 +114,6 @@ class BannerController extends Controller
             'Keterangan2' => $data['Keterangan2'] ?? null,
         ];
 
-        if ((int)$currentUser->LevelID === 2) {
-            $bannerData['IDTravel'] = $currentUser->IDTravel;
-        } else {
-            $bannerData['IDTravel'] = !empty($data['IDTravel']) ? $data['IDTravel'] : null;
-        }
-
         if ($isUpdate) {
             $targetBanner = MstBanner::where('KodeBanner', $kodeBanner)->first();
             if (!$targetBanner || !$this->checkBannerAccess($targetBanner)) {

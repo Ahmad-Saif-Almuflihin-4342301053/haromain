@@ -17,25 +17,7 @@
 
                             <div class="d-flex justify-content-between flex-wrap">
 
-                                @if (Auth::user()->LevelID == 1)
-                                    <div class="form-group col-md-12">
-                                        <label>Pemilik Banner / Travel</label>
-                                        <select name="IDTravel" id="IDTravel" class="form-control select2">
-                                            <option value="" {{ empty($banner->IDTravel) ? 'selected' : '' }}>
-                                                Haromain (Pusat / Umum)
-                                            </option>
-                                            @foreach ($travel as $row)
-                                                <option value="{{ $row->IDTravel }}"
-                                                    {{ ($banner->IDTravel ?? '') == $row->IDTravel ? 'selected' : '' }}>
-                                                    {{ $row->NamaTravel }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        <small class="form-text text-muted">
-                                            Pilih <strong>Haromain (Pusat / Umum)</strong> jika banner milik Haromain, atau pilih travel jika banner khusus untuk travel tersebut.
-                                        </small>
-                                    </div>
-                                @endif
+
 
                                 <div class="form-group col-md-12">
                                     <label>Gambar</label>

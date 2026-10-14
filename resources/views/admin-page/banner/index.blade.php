@@ -9,30 +9,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between flex-wrap">
-                            <div class="row w-100 mb-2">
-                                @if (Auth::user()->LevelID == 1)
-                                    <div class="col-md-4 mb-2">
-                                        <select name="IDTravel" id="filter-travel" class="form-control select2">
-                                            <option value="">Semua Banner</option>
-                                            <option value="haromain">Haromain (Pusat)</option>
-                                            @if(isset($travel))
-                                                @foreach ($travel as $row)
-                                                    <option value="{{ $row->IDTravel }}">{{ $row->NamaTravel }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                @endif
-                                <div class="{{ Auth::user()->LevelID == 1 ? 'col-md-8' : 'col-md-12' }} mb-2">
-                                    <form id="form-search" method="get" class="w-100">
-                                        <div class="input-search d-flex align-items-center px-3">
-                                            <i class="fa fa-search text-gray mr-2"></i>
-                                            <input type="text" class="input-text" id="search-keyword" placeholder="Cari Data">
-                                            <button type="submit" class="btn btn-primary">Cari</button>
-                                        </div>
-                                    </form>
+                            <form id="form-search" method="get" class="w-100">
+                                <div class="input-search d-flex align-items-center px-3">
+                                    <i class="fa fa-search text-gray mr-2"></i>
+                                    <input type="text" class="input-text" id="search-keyword" placeholder="Cari Data">
+                                    <button type="submit" class="btn btn-primary">Cari</button>
                                 </div>
-                            </div>
+                            </form>
 
                             <div class="table-responsive mt-4">
                                 <a href="{{ url('admin/Banner/tambah') }}" class="btn btn-primary float-right">Tambah</a>
@@ -42,9 +25,6 @@
                                         <tr>
                                             <th>No.</th>
                                             <th>Foto</th>
-                                            @if(Auth::user()->LevelID == 1)
-                                                <th>Travel</th>
-                                            @endif
                                             <th>Keterangan 1</th>
                                             <th>Keterangan 2</th>
                                             <th>Status</th>
@@ -68,7 +48,6 @@
 <script>
     $(document).ready(function () {
 
-        const isSuperadmin = {{ Auth::user()->LevelID == 1 ? 'true' : 'false' }};
         const baseURL = "{{ url('/') }}/";
 
         const table = $('#datatable').DataTable({
@@ -80,11 +59,6 @@
                 type: "POST",
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                data: function (d) {
-                    if (isSuperadmin) {
-                        d.IDTravel = $('#filter-travel').val();
-                    }
                 }
             },
             columns: [
@@ -110,18 +84,6 @@
                                 </button>`;
                     }
                 },
-                @if(Auth::user()->LevelID == 1)
-                {
-                    data: 'NamaTravel',
-                    name: 'msttravel.NamaTravel',
-                    render: function (data, type, row) {
-                        if (!row.IDTravel) {
-                            return '<span class="badge badge-primary font-weight-bold">Haromain</span>';
-                        }
-                        return data ? `<span class="badge badge-info">${data}</span>` : '<span class="text-muted">-</span>';
-                    }
-                },
-                @endif
                 { data: 'Keterangan1' },
                 { data: 'Keterangan2' },
                 {
@@ -166,12 +128,6 @@
                 $('.bs-toggle').bootstrapToggle();
             }
         });
-
-        if (isSuperadmin) {
-            $('#filter-travel').on('change', function () {
-                table.ajax.reload();
-            });
-        }
 
         $('#form-search').on('submit', function (e) {
             e.preventDefault()
