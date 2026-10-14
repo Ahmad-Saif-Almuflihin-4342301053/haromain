@@ -15,7 +15,13 @@
     <!-- Banner Hero Compact -->
     <div class="relative w-full h-56 md:h-64 lg:h-72">
         <!-- Background image -->
-        <img src="{{ url('/') }}/assets/konten/{{ @$this->galeriHeader->GambarKonten }}" alt="Galeri"
+        @php
+            $galeriImg = @$this->galeriHeader->GambarKonten;
+            $galeriHeroUrl = ($galeriImg && file_exists(public_path('assets/konten/' . $galeriImg)) && $galeriImg !== 'Gbr1.png')
+                ? asset('assets/konten/' . $galeriImg)
+                : asset('assets/revisi-landing/image5.jpeg');
+        @endphp
+        <img src="{{ $galeriHeroUrl }}" alt="Panduan & Simulasi Haromain"
             class="absolute inset-0 w-full h-full object-cover object-center" />
 
         <!-- Overlay -->

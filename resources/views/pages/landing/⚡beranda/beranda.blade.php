@@ -3,11 +3,27 @@
     <section class="relative h-screen pt-20 z-10" x-data="{ currentSlide: 0, slides: {{ count($this->listSlider) }} }" x-init="setInterval(() => { currentSlide = (currentSlide + 1) % slides }, 5000)">
         @foreach ($this->listSlider as $key => $slider)
             <!-- Slide 1 -->
+            @php
+                $bannerFile = $slider['Gambar'] ?? '';
+                if ($bannerFile && file_exists(public_path('assets/banner/' . $bannerFile))) {
+                    $bannerUrl = asset('assets/banner/' . $bannerFile);
+                } elseif ($bannerFile && file_exists(public_path('assets/konten/' . $bannerFile))) {
+                    $bannerUrl = asset('assets/konten/' . $bannerFile);
+                } else {
+                    $fallbackBanners = [
+                        asset('assets/banner/1788334763.jpg'),
+                        asset('assets/banner/1788334800.jpg'),
+                        asset('assets/banner/1769871663.jpg'),
+                        asset('assets/banner/1771813736.jpg'),
+                    ];
+                    $bannerUrl = $fallbackBanners[$key % count($fallbackBanners)];
+                }
+            @endphp
             <div x-show="currentSlide === {{ $key }}" x-transition:enter="transition ease-out duration-1000"
                 x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
                 x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0" class="absolute inset-0 bg-cover bg-center"
-                style="background-image: url('{{ asset('assets/banner/') }}/{{ $slider['Gambar'] }}');">
+                style="background-image: url('{{ $bannerUrl }}');">
                 <!-- Gradient Overlay from bottom to top -->
                 <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
                 <div class="relative h-full flex items-end pb-24 md:pb-32">
