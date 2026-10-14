@@ -79,24 +79,20 @@ class AuthController extends Controller
             ]);
         }
 
-        if (Hash::needsRehash($user->UserPsw) === false) {
-
-            if (!Hash::check($request->UserPsw, $user->UserPsw)) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Username atau password salah'
+        if (Hash::check($request->UserPsw, $user->UserPsw)) {
+            if (Hash::needsRehash($user->UserPsw)) {
+                $user->update([
+                    'UserPsw' => Hash::make($request->UserPsw)
                 ]);
             }
-        } else {
-
-            if ($user->UserPsw !== md5($request->UserPsw)) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Username atau password salah'
-                ]);
-            }
+        } elseif ($user->UserPsw === md5($request->UserPsw)) {
             $user->update([
                 'UserPsw' => Hash::make($request->UserPsw)
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Username atau password salah'
             ]);
         }
 
