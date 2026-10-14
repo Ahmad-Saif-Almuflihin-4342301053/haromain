@@ -16,7 +16,11 @@ new #[Layout('layouts::landing')] class extends Component {
     #[Computed]
     public function listSlider()
     {
-        return app(BerandaService::class)->getSlider();
+        try {
+            return app(BerandaService::class)->getSlider();
+        } catch (\Throwable $e) {
+            return \App\Models\MstBanner::where('IsAktif', 1)->get()->toArray();
+        }
     }
 
     #[Computed]

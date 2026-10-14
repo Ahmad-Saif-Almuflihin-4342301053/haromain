@@ -1,11 +1,14 @@
 <div class="bg-white min-h-screen">
     <!-- Banner Hubungi Kami -->
-    <div class="relative w-full h-56 md:h-64 lg:h-72  ">
-        <img src="https://cdn1-production-images-kly.akamaized.net/xc4xgs2dX-ywyabfda-4b8Qwaxw=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/1507755/original/090908700_1487093719-AHY1.jpg" alt="Kabah"
+    <div class="relative w-full h-56 md:h-64 lg:h-72">
+        <img src="{{ asset('assets/revisi-landing/image6.jpeg') }}" alt="Hubungi Kami"
             class="absolute inset-0 w-full h-full object-cover object-center" />
         <div class="absolute inset-0 h-full bg-linear-to-t from-black via-black/40 to-transparent"></div>
-        <div class="max-w-7xl mx-auto  h-56 py-8 flex items-end">
-            <h1 class="relative z-10 text-white text-3xl md:text-4xl font-bold mb-6 ml-3">Hubungi Kami</h1>
+        <div class="max-w-7xl mx-auto h-full px-4 flex flex-col justify-end pb-6 md:pb-8">
+            <h1 class="relative z-10 text-white text-3xl md:text-4xl font-bold mb-2">Hubungi Kami</h1>
+            <p class="relative z-10 text-gray-200 text-sm md:text-base">
+                Konsultasikan kebutuhan pelayanan digital travel Anda bersama tim Haromain.
+            </p>
         </div>
     </div>
 
