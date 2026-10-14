@@ -12,23 +12,29 @@
         document.body.classList.remove('overflow-hidden');
     }
 }">
-    <!-- Banner -->
-    <div class="relative w-full min-h-screen -mt-18">
+    <!-- Banner Hero Compact -->
+    <div class="relative w-full h-56 md:h-64 lg:h-72">
         <!-- Background image -->
-        <img src="{{ url('/') }}/assets/konten/{{ @$this->galeriHeader->GambarKonten }}" alt="Galeri"
+        @php
+            $galeriImg = @$this->galeriHeader->GambarKonten;
+            $galeriHeroUrl = ($galeriImg && file_exists(public_path('assets/konten/' . $galeriImg)) && $galeriImg !== 'Gbr1.png')
+                ? asset('assets/konten/' . $galeriImg)
+                : asset('assets/revisi-landing/image5.jpeg');
+        @endphp
+        <img src="{{ $galeriHeroUrl }}" alt="Panduan & Simulasi Haromain"
             class="absolute inset-0 w-full h-full object-cover object-center" />
 
         <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
 
-        <!-- CONTENT CONTAINER (SAMA DENGAN LAYOUT) -->
-        <div class="relative z-10 max-w-7xl mx-auto px-4 py-12 min-h-screen flex items-end">
-            <div class="max-w-lg text-left">
+        <!-- CONTENT CONTAINER -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 h-full flex flex-col justify-end pb-6 md:pb-8">
+            <div class="max-w-2xl text-left">
                 <h1 class="text-white text-3xl md:text-4xl font-bold mb-2">
-                    {{ @$this->galeriHeader->JudulKonten }}
+                    Panduan & Simulasi Haromain
                 </h1>
-                <p class="text-white text-lg md:text-xl mb-4">
-                    {{ @$this->galeriHeader->IsiKonten }}
+                <p class="text-gray-200 text-sm md:text-base">
+                    Video panduan, tutorial, dan simulasi penggunaan Haromain dalam pelayanan jamaah.
                 </p>
             </div>
         </div>
@@ -173,17 +179,7 @@
     @endforelse
 
 
-    <div class="max-w-7xl mx-auto px-4 pb-16">
-        <div class="bg-amber-400 rounded-xl p-6 md:p-8 flex flex-col items-center justify-center">
-            <div class="text-white text-lg md:text-xl! font-semibold text-center mb-4">
-                {{ @$this->galeriFooter->IsiKonten }}
-            </div>
-            <a href="#"
-                class="inline-block border border-white text-white px-6 py-2 rounded-lg font-semibold transition text-base">
-                {{ @$this->galeriFooter->JudulKonten }}
-            </a>
-        </div>
-    </div>
+
 
     <!-- Modal Video Player -->
     <div x-show="showModal" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
