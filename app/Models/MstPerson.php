@@ -53,8 +53,6 @@ class MstPerson extends Authenticatable
         'UserName',
         'Token',
         'IsVerified',
-        'IDTravel',
-        'IDCabang',
     ];
 
     protected $hidden = [
@@ -80,44 +78,12 @@ class MstPerson extends Authenticatable
 
     private function baseDatatableQuery(array $where = [])
     {
-        $query = DB::table('mstperson')
-            ->select([
-                'mstperson.NamaJamaah',
-                'mstperson.Tgl_Register',
-                'mstperson.NoHP',
-                'mstperson.FotoProfil',
-                'mstperson.IsAktif',
-                'mstperson.IDPerson',
-                'mstperson.IDTravel',
-                'mstperson.IDCabang',
-                'cb.NamaCabang',
-                DB::raw("COALESCE(tr.NamaTravel, GROUP_CONCAT(msttravel.NamaTravel SEPARATOR ', ')) AS NamaTravel"),
-                DB::raw("GROUP_CONCAT(mstpaket.NamaPaket SEPARATOR ', ') AS NamaPaket"),
-            ])
-            ->leftJoin('msttravel as tr', 'tr.IDTravel', '=', 'mstperson.IDTravel')
-            ->leftJoin('mstcabang as cb', 'cb.IDCabang', '=', 'mstperson.IDCabang')
-            ->leftJoin('jamaahpaket', 'jamaahpaket.IDPerson', '=', 'mstperson.IDPerson')
-            ->leftJoin('mstpaket', 'mstpaket.IDPaket', '=', 'jamaahpaket.IDPaket')
-            ->leftJoin('msttravel', 'msttravel.IDTravel', '=', 'jamaahpaket.IDTravel')
-            ->where($where)
-            ->groupBy([
-                'mstperson.NamaJamaah',
-                'mstperson.Tgl_Register',
-                'mstperson.NoHP',
-                'mstperson.FotoProfil',
-                'mstperson.IsAktif',
-                'mstperson.IDPerson',
-                'mstperson.IDTravel',
-                'mstperson.IDCabang',
-                'cb.NamaCabang',
-                'tr.NamaTravel'
-            ]);
-
-        return $query;
+        return $this->getDatatablesQuery($where);
     }
 
-    private function getDatatablesQuery(array $where)
+    private function getDatatablesQuery($where = [])
     {
+        $where = is_array($where) ? $where : [];
         $query = DB::table('mstperson')
             ->selectRaw("
             mstperson.IDPerson,
@@ -126,33 +92,31 @@ class MstPerson extends Authenticatable
             mstperson.NoHP,
             mstperson.FotoProfil,
             mstperson.IsAktif,
-            mstperson.IDTravel,
-            mstperson.IDCabang,
             cb.NamaCabang,
-            COALESCE(tr.NamaTravel, GROUP_CONCAT(msttravel.NamaTravel SEPARATOR ', ')) AS NamaTravel,
-            GROUP_CONCAT(mstpaket.NamaPaket SEPARATOR ', ') AS NamaPaket
+            GROUP_CONCAT(DISTINCT msttravel.NamaTravel SEPARATOR ', ') AS NamaTravel,
+            GROUP_CONCAT(DISTINCT mstpaket.NamaPaket SEPARATOR ', ') AS NamaPaket
         ")
-            ->leftJoin('msttravel as tr', 'tr.IDTravel', '=', 'mstperson.IDTravel')
-            ->leftJoin('mstcabang as cb', 'cb.IDCabang', '=', 'mstperson.IDCabang')
             ->leftJoin('jamaahpaket', 'jamaahpaket.IDPerson', '=', 'mstperson.IDPerson')
+            ->leftJoin('mstcabang as cb', 'cb.IDCabang', '=', 'jamaahpaket.IDCabang')
             ->leftJoin('mstpaket', 'mstpaket.IDPaket', '=', 'jamaahpaket.IDPaket')
-            ->leftJoin('msttravel', 'msttravel.IDTravel', '=', 'jamaahpaket.IDTravel')
-            ->where($where)
-            ->groupBy(
-                'mstperson.IDPerson',
-                'mstperson.NamaJamaah',
-                'mstperson.Tgl_Register',
-                'mstperson.NoHP',
-                'mstperson.FotoProfil',
-                'mstperson.IsAktif',
-                'mstperson.IDTravel',
-                'mstperson.IDCabang',
-                'cb.NamaCabang',
-                'tr.NamaTravel'
-            );
+            ->leftJoin('msttravel', 'msttravel.IDTravel', '=', 'jamaahpaket.IDTravel');
 
-        if (!empty(request('search.value'))) {
-            $search = request('search.value');
+        if (!empty($where)) {
+            $query->where($where);
+        }
+
+        $query->groupBy(
+            'mstperson.IDPerson',
+            'mstperson.NamaJamaah',
+            'mstperson.Tgl_Register',
+            'mstperson.NoHP',
+            'mstperson.FotoProfil',
+            'mstperson.IsAktif',
+            'cb.NamaCabang'
+        );
+
+        $search = request('search.value') ?: request('searchKeyword');
+        if (!empty($search)) {
             $query->where(function ($q) use ($search) {
                 foreach ($this->columnSearch as $i => $column) {
                     if ($i === 0) {
@@ -180,17 +144,7 @@ class MstPerson extends Authenticatable
 
     public function countFiltered(array $where = [])
     {
-        $request = request();
-        $query   = $this->getDatatablesQuery($where);
-
-        if ($search = $request->input('search.value')) {
-            $query->where(function ($q) use ($search) {
-                foreach ($this->columnSearch as $column) {
-                    $q->orWhere($column, 'like', "%{$search}%");
-                }
-            });
-        }
-
+        $query = $this->getDatatablesQuery($where);
         return $query->get()->count();
     }
 
@@ -198,7 +152,9 @@ class MstPerson extends Authenticatable
     {
         $query = DB::table('mstperson');
         if (!empty($where)) {
-            $query->where($where);
+            $query->leftJoin('jamaahpaket', 'jamaahpaket.IDPerson', '=', 'mstperson.IDPerson')
+                  ->where($where);
+            return $query->distinct('mstperson.IDPerson')->count('mstperson.IDPerson');
         }
         return $query->count();
     }

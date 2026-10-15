@@ -30,7 +30,6 @@ class MstKonten extends Model
 
     protected $fillable = [
         'IDKonten',
-        'IDTravel',
         'IDKatKonten',
         'JudulKonten',
         'IsiKonten',
@@ -61,8 +60,7 @@ class MstKonten extends Model
         'k.IsiKonten',
         'k.Author',
         'k.JenisKonten',
-        'kk.NamaKategori',
-        'tr.NamaTravel'
+        'kk.NamaKategori'
     ];
 
     protected $order = ['TanggalKonten' => 'desc'];
@@ -265,8 +263,6 @@ class MstKonten extends Model
         $query = DB::table('mstkonten as k')
             ->select(
                 'k.IDKonten',
-                'k.IDTravel',
-                'tr.NamaTravel',
                 'k.JudulKonten',
                 'k.IsiKonten',
                 'k.GambarKonten',
@@ -283,14 +279,8 @@ class MstKonten extends Model
                 'kt.NamaKota',
                 'k.NoUrut'
             )
-            ->leftJoin('msttravel as tr', 'tr.IDTravel', '=', 'k.IDTravel')
             ->leftJoin('mstkategorikonten as kk', 'kk.IDKatKonten', '=', 'k.IDKatKonten')
             ->leftJoin('mstkota as kt', 'kt.IDKota', '=', 'k.IDKota');
-
-        $user = Auth::user();
-        if ($user && (int)$user->LevelID === 2) {
-            $query->where('k.IDTravel', $user->IDTravel);
-        }
 
         if ($this->getJenisKonten()) {
             $query->where('k.JenisKonten', $this->getJenisKonten());
@@ -316,8 +306,7 @@ class MstKonten extends Model
             $query->where(function ($q) {
                 $q->where('k.JudulKonten', 'like', '%' . $_POST['searchKeyword'] . '%')
                     ->orWhere('k.IsiKonten', 'like', '%' . $_POST['searchKeyword'] . '%')
-                    ->orWhere('k.Author', 'like', '%' . $_POST['searchKeyword'] . '%')
-                    ->orWhere('tr.NamaTravel', 'like', '%' . $_POST['searchKeyword'] . '%');
+                    ->orWhere('k.Author', 'like', '%' . $_POST['searchKeyword'] . '%');
             });
         }
 
@@ -343,11 +332,6 @@ class MstKonten extends Model
     public function count_all_datatables()
     {
         $query = DB::table($this->table);
-
-        $user = Auth::user();
-        if ($user && (int)$user->LevelID === 2) {
-            $query->where('IDTravel', $user->IDTravel);
-        }
 
         if ($this->getJenisKonten()) {
             $query->where('JenisKonten', $this->getJenisKonten());

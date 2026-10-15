@@ -40,9 +40,6 @@
                                     <tr>
                                         <th>No.</th>
                                         <th>Gambar</th>
-                                        @if(Auth::user()->LevelID == 1)
-                                            <th>Travel</th>
-                                        @endif
                                         <th>Tanggal</th>
                                         <th>Judul</th>
                                         <th>Author</th>
@@ -105,13 +102,6 @@
                         return '-';
                     }
                 },
-                @if(Auth::user()->LevelID == 1)
-                {
-                    data: 'NamaTravel',
-                    name: 'tr.NamaTravel',
-                    defaultContent: '-'
-                },
-                @endif
                 { data: 'TanggalKonten' },
                 { data: 'JudulKonten' },
                 { data: 'Author' },

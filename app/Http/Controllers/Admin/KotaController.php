@@ -34,12 +34,9 @@ class KotaController extends Controller
             return true;
         }
 
-        // Admin Travel Pusat
+        // Admin Travel Pusat (LevelID 2 tanpa IDCabang) diizinkan mengakses data kota
         if ((int)$user->LevelID === 2 && empty($user->IDCabang)) {
-            if ($kota === null) {
-                return true;
-            }
-            return $kota->IDTravel === $user->IDTravel;
+            return true;
         }
 
         return false;
@@ -64,7 +61,6 @@ class KotaController extends Controller
 
         return view('admin-page.kota.tambah', [
             'menu'   => 'Data Kota',
-            'travel' => MstTravel::where('StatusAkun', 'Aktif')->get()
         ]);
     }
 
@@ -81,7 +77,6 @@ class KotaController extends Controller
         return view('admin-page.kota.tambah', [
             'menu'   => 'Data Kota',
             'data'   => $dataKota,
-            'travel' => MstTravel::where('StatusAkun', 'Aktif')->get()
         ]);
     }
 
@@ -98,12 +93,6 @@ class KotaController extends Controller
             'NamaKota' => $request->NamaKota,
             'IsAktif'  => 1
         ];
-
-        if ((int)$currentUser->LevelID === 2) {
-            $kotaData['IDTravel'] = $currentUser->IDTravel;
-        } else {
-            $kotaData['IDTravel'] = !empty($request->IDTravel) ? $request->IDTravel : null;
-        }
 
         if ($IDKota) {
             $targetKota = $this->MstKota->where('IDKota', $IDKota)->first();

@@ -29,21 +29,6 @@ $edit = isset($data);
                             <input type="hidden" name="id" value="{{ $data['IDKota'] }}">
                             @endif
 
-                            @if (Auth::user()->LevelID == 1)
-                            <div class="form-group">
-                                <label for="IDTravel">Perusahaan Travel</label>
-                                <select name="IDTravel" id="IDTravel" class="form-control select2" required>
-                                    <option value="">Pilih Perusahaan Travel</option>
-                                    @foreach ($travel as $row)
-                                        <option value="{{ $row->IDTravel }}"
-                                            {{ ($data['IDTravel'] ?? '') == $row->IDTravel ? 'selected' : '' }}>
-                                            {{ $row->NamaTravel }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @endif
-
                             <div class="form-group">
                                 <label for="nama">Nama Kota</label>
                                 <input

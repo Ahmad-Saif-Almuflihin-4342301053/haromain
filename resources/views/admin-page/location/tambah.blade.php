@@ -31,21 +31,6 @@
                                 <input type="hidden" name="old_GambarKonten" value="{{ $locationData->GambarKonten }}">
                             @endif
 
-                            @if (Auth::user()->LevelID == 1)
-                                <div class="form-group">
-                                    <label for="IDTravel">Perusahaan Travel</label>
-                                    <select name="IDTravel" id="IDTravel" class="form-control select2" required>
-                                        <option value="">Pilih Perusahaan Travel</option>
-                                        @foreach ($travel as $row)
-                                            <option value="{{ $row->IDTravel }}"
-                                                {{ $editMode && ($locationData->IDTravel ?? '') == $row->IDTravel ? 'selected' : '' }}>
-                                                {{ $row->NamaTravel }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            @endif
-
                             <div class="form-group">
                                 <label for="JudulKonten">Nama Lokasi</label>
                                 <input type="text"
@@ -63,7 +48,7 @@
                                     <option value="">Pilih Kategori</option>
                                     @foreach ($kategori_konten as $kat)
                                         <option value="{{ $kat->IDKatKonten }}"
-                                            {{ $editMode && $locationData->IDKatKonten == $kat->IDKatKonten ? 'selected' : '' }}>
+                                            {{ $editMode && ($locationData->IDKatKonten ?? '') == $kat->IDKatKonten ? 'selected' : '' }}>
                                             {{ $kat->NamaKategori }}
                                         </option>
                                     @endforeach
@@ -72,28 +57,15 @@
 
                             <div class="form-group">
                                 <label for="IDKota">Kota</label>
-                                @if (Auth::user()->LevelID == 1)
-                                    <select class="form-control select2" id="IDKota" name="IDKota" required {{ (!$editMode || empty($locationData->IDTravel)) ? 'disabled' : '' }}>
-                                        <option value="">{{ ($editMode && !empty($locationData->IDTravel)) ? 'Pilih Kota' : 'Pilih Travel Terlebih Dahulu' }}</option>
-                                        @foreach ($kota as $k)
-                                            <option value="{{ $k->IDKota }}"
-                                                {{ $editMode && $locationData->IDKota == $k->IDKota ? 'selected' : '' }}>
-                                                {{ $k->NamaKota }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <small class="text-muted">Pilihan kota disesuaikan dengan travel yang dipilih.</small>
-                                @else
-                                    <select class="form-control select2" id="IDKota" name="IDKota" required>
-                                        <option value="">Pilih Kota</option>
-                                        @foreach ($kota as $k)
-                                            <option value="{{ $k->IDKota }}"
-                                                {{ $editMode && $locationData->IDKota == $k->IDKota ? 'selected' : '' }}>
-                                                {{ $k->NamaKota }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                @endif
+                                <select class="form-control select2" id="IDKota" name="IDKota" required>
+                                    <option value="">Pilih Kota</option>
+                                    @foreach ($kota as $k)
+                                        <option value="{{ $k->IDKota }}"
+                                            {{ $editMode && ($locationData->IDKota ?? '') == $k->IDKota ? 'selected' : '' }}>
+                                            {{ $k->NamaKota }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
@@ -143,7 +115,11 @@
                                        required>
                             </div>
 
-                            <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+                            <button type="submit" class="btn btn-primary mr-2" id="btn-submit">Simpan</button>
+                            <button class="btn btn-primary loading mr-2 d-none" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>
                             <a href="{{ route('admin.location') }}" class="btn btn-light">Batal</a>
                         </form>
 
@@ -227,45 +203,11 @@
             ]
         });
 
-        @if (Auth::user()->LevelID == 1)
-        $('#IDTravel').on('change', function () {
-            let idTravel = $(this).val();
-            let $kotaSelect = $('#IDKota');
-            $kotaSelect.empty();
-
-            if (!idTravel) {
-                $kotaSelect.attr('disabled', true);
-                $kotaSelect.append('<option value="">Pilih Travel Terlebih Dahulu</option>');
-                return;
-            }
-
-            $kotaSelect.removeAttr('disabled');
-            $kotaSelect.append('<option value="">Memuat data kota...</option>');
-
-            $.ajax({
-                url: "{{ url('admin/location/getKotaByTravel') }}/" + idTravel,
-                type: "GET",
-                success: function (res) {
-                    $kotaSelect.empty();
-                    $kotaSelect.append('<option value="">Pilih Kota</option>');
-                    if (res && res.length > 0) {
-                        res.forEach(function (item) {
-                            $kotaSelect.append(`<option value="${item.IDKota}">${item.NamaKota}</option>`);
-                        });
-                    } else {
-                        $kotaSelect.append('<option value="">Tidak ada data kota untuk travel ini</option>');
-                    }
-                },
-                error: function () {
-                    $kotaSelect.empty();
-                    $kotaSelect.append('<option value="">Gagal memuat data kota</option>');
-                }
-            });
-        });
-        @endif
-
         $('#form-tambah').on('submit', function (e) {
             e.preventDefault();
+
+            $('#btn-submit').addClass('d-none');
+            $('.loading').removeClass('d-none');
 
             let formData = new FormData(this);
 
@@ -291,13 +233,20 @@
                         });
                     } else {
                         toast('error', response.message);
+                        resetButton();
                     }
                 },
                 error: function () {
                     toast('error', 'Gagal menyimpan data');
+                    resetButton();
                 }
             });
         });
+
+        function resetButton() {
+            $('#btn-submit').removeClass('d-none');
+            $('.loading').addClass('d-none');
+        }
     });
 </script>
 

@@ -16,6 +16,7 @@ use App\Traits\UploadFileTrait;
 use App\Traits\DatatablesResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Kreait\Firebase\Factory as Factory;
@@ -52,13 +53,15 @@ class PersonController extends Controller
                 return true;
             }
 
-            // If user is Admin Cabang, must match IDCabang and IDTravel
+            $query = DB::table('jamaahpaket')
+                ->where('IDPerson', $person->IDPerson)
+                ->where('IDTravel', $user->IDTravel);
+
             if (!empty($user->IDCabang)) {
-                return $person->IDCabang === $user->IDCabang && $person->IDTravel === $user->IDTravel;
+                $query->where('IDCabang', $user->IDCabang);
             }
 
-            // If user is Admin Travel Pusat, must match IDTravel
-            return $person->IDTravel === $user->IDTravel;
+            return $query->exists();
         }
 
         return false;
@@ -264,14 +267,6 @@ class PersonController extends Controller
             'IDProv' => $request->IDProv,
             'Email' => $request->Email,
         ];
-
-        if ((int)$currentUser->LevelID === 2) {
-            $jamaah['IDTravel'] = $currentUser->IDTravel;
-            $jamaah['IDCabang'] = !empty($currentUser->IDCabang) ? $currentUser->IDCabang : null;
-        } else {
-            $jamaah['IDTravel'] = !empty($request->IDTravel) ? $request->IDTravel : null;
-            $jamaah['IDCabang'] = !empty($request->IDCabang) ? $request->IDCabang : null;
-        }
 
         if ($IDPerson) {
             $target = $this->MstPerson->where('IDPerson', $IDPerson)->first();
@@ -479,15 +474,15 @@ class PersonController extends Controller
 
         if ((int)$currentUser->LevelID === 2) {
             if (!empty($currentUser->IDCabang)) {
-                $where['mstperson.IDCabang'] = $currentUser->IDCabang;
-                $where['mstperson.IDTravel'] = $currentUser->IDTravel;
+                $where['jamaahpaket.IDCabang'] = $currentUser->IDCabang;
+                $where['jamaahpaket.IDTravel'] = $currentUser->IDTravel;
             } else {
-                $where['mstperson.IDTravel'] = $currentUser->IDTravel;
+                $where['jamaahpaket.IDTravel'] = $currentUser->IDTravel;
             }
         } else {
             $IDTravel = $request->IDTravel ?? $request->trv;
             if ($IDTravel) {
-                $where['mstperson.IDTravel'] = $IDTravel;
+                $where['jamaahpaket.IDTravel'] = $IDTravel;
             }
         }
 
