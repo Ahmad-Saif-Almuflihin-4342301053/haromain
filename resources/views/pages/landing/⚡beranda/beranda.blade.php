@@ -83,9 +83,6 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-10 text-gray-900">
                 Pelayanan Lebih Baik, Kepercayaan Jamaah Meningkat
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
-                Haromain menyatukan pelayanan jamaah dari pendaftaran hingga kepulangan. Travel bekerja lebih tertata, jamaah mendapatkan pelayanan yang lebih baik, dan keluarga merasa lebih tenang.
-            </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <!-- Kolom Kiri: Gambar -->
