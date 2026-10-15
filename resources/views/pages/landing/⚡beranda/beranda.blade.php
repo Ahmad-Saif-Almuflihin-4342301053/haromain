@@ -80,38 +80,28 @@
     <!-- Section 1: Pelayanan Lebih Baik, Kepercayaan Jamaah Meningkat -->
     <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-gray-900">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-10 text-gray-900">
                 Pelayanan Lebih Baik, Kepercayaan Jamaah Meningkat
             </h2>
 
-            <div class="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-8 lg:gap-12 items-center">
-                <div class="order-2 lg:order-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Kolom Kiri: Gambar -->
+                <div>
                     <img src="{{ asset('assets/revisi-landing/image1.jpeg') }}" alt="Pelayanan Lebih Baik"
-                        class="w-full h-64 md:h-80 lg:h-96 object-cover rounded-2xl shadow-lg">
+                        class="w-full h-72 md:h-84 lg:h-96 object-cover rounded-2xl shadow-md">
                 </div>
 
-                <div class="order-1 lg:order-2 space-y-3">
+                <!-- Kolom Kanan: Teks & Poin -->
+                <div class="space-y-4">
                     <p class="text-gray-700 text-base md:text-lg leading-relaxed">
                         Jamaah dan keluarga tidak hanya mempertimbangkan harga dan fasilitas, tetapi juga kualitas pelayanan, kemudahan memperoleh informasi, serta pendampingan selama perjalanan.
                     </p>
 
-                    <ul class="space-y-2.5 my-4 text-gray-700">
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Administrasi yang rumit dapat memperlambat pelayanan.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Informasi yang tersebar menyulitkan jamaah dan petugas.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Koordinasi perjalanan membutuhkan sistem yang lebih tertata.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Keluarga memerlukan akses informasi tentang perjalanan jamaah.</span>
-                        </li>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm md:text-base leading-relaxed">
+                        <li>Administrasi yang rumit dapat memperlambat pelayanan.</li>
+                        <li>Informasi yang tersebar menyulitkan jamaah dan petugas.</li>
+                        <li>Koordinasi perjalanan membutuhkan sistem yang lebih tertata.</li>
+                        <li>Keluarga memerlukan akses informasi tentang perjalanan jamaah.</li>
                     </ul>
 
                     <p class="text-gray-900 font-medium leading-relaxed pt-2">
@@ -123,7 +113,7 @@
     </section>
 
     <!-- Section 2: Bukan Sekadar Aplikasi, Haromain Meningkatkan Standar Pelayanan Travel -->
-    <section class="py-12 md:py-16 bg-gray-50">
+    <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 Bukan Sekadar Aplikasi, Haromain Meningkatkan Standar Pelayanan Travel
@@ -132,41 +122,38 @@
                 Haromain menyatukan pelayanan jamaah dari pendaftaran hingga kepulangan. Travel bekerja lebih tertata, jamaah mendapatkan pelayanan yang lebih baik, dan keluarga merasa lebih tenang.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition">
-                    <div>
-                        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 mb-4 font-bold text-lg">
-                            01
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Travel Lebih Profesional</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
-                            Administrasi, pembayaran, dokumen, manifest, dan perjalanan jamaah dikelola dalam satu sistem.
-                        </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
+                <!-- Travel Lebih Profesional -->
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <img src="{{ asset('assets/konten/leadership.svg') }}" alt="Travel" class="w-12 h-12">
                     </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Travel Lebih Profesional</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        Administrasi, pembayaran, dokumen, manifest, dan perjalanan jamaah dikelola dalam satu sistem.
+                    </p>
                 </div>
 
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition">
-                    <div>
-                        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 mb-4 font-bold text-lg">
-                            02
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Jamaah Lebih Terlayani</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
-                            Informasi, itinerary, dokumen, komunikasi, dan pendampingan tersedia dalam satu aplikasi.
-                        </p>
+                <!-- Jamaah Lebih Terlayani -->
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <img src="{{ asset('assets/konten/social-justice.svg') }}" alt="Jamaah" class="w-12 h-12">
                     </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Jamaah Lebih Terlayani</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        Informasi, itinerary, dokumen, komunikasi, dan pendampingan tersedia dalam satu aplikasi.
+                    </p>
                 </div>
 
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between hover:shadow-md transition">
-                    <div>
-                        <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 mb-4 font-bold text-lg">
-                            03
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Kepercayaan Semakin Kuat</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
-                            Pelayanan yang transparan dan terhubung memberikan alasan lebih kuat bagi masyarakat untuk memilih travel Anda.
-                        </p>
+                <!-- Kepercayaan Semakin Kuat -->
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <img src="{{ asset('assets/konten/check.svg') }}" alt="Kepercayaan" class="w-12 h-12">
                     </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Kepercayaan Semakin Kuat</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        Pelayanan yang transparan dan terhubung memberikan alasan lebih kuat bagi masyarakat untuk memilih travel Anda.
+                    </p>
                 </div>
             </div>
 
@@ -182,145 +169,92 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 Satu Aplikasi untuk Setiap Tahapan Perjalanan
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 md:mb-14 text-base md:text-lg leading-relaxed">
+            <p class="text-center text-gray-600 max-w-3xl mx-auto pb-16 text-base md:text-lg leading-relaxed">
                 Haromain membantu travel memberikan pelayanan yang terintegrasi sejak jamaah memilih paket, mempersiapkan keberangkatan, menjalani perjalanan ibadah, hingga kembali ke Tanah Air.
             </p>
 
-            <div class="space-y-12 md:space-y-16">
+            <div>
                 <!-- Tahap A: Sebelum Keberangkatan -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start pb-16 md:pb-24">
                     <div>
                         <img src="{{ asset('assets/revisi-landing/image2.jpeg') }}"
                             alt="Sebelum Keberangkatan"
-                            class="w-full h-72 md:h-84 lg:h-96 object-cover rounded-2xl shadow-lg">
+                            class="w-full h-auto rounded-2xl shadow-md object-cover">
                     </div>
-                    <div class="space-y-3">
-                        <span class="text-amber-600 font-bold text-sm md:text-base tracking-wider uppercase block mb-1">
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                             A. Sebelum Keberangkatan
-                        </span>
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-snug">
-                            Pendaftaran dan Administrasi Lebih Mudah
                         </h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Katalog & detail paket Haji/Umrah</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Konsultasi via WhatsApp</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Pendaftaran & pembayaran via aplikasi</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Unggah & pemeriksaan dokumen</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Pengelolaan tiket, visa, dan dokumen SISKOPATUH</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Pengelolaan data & manifest jamaah</span>
-                            </li>
+                        <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">
+                            Pendaftaran dan Administrasi Lebih Mudah
+                        </h4>
+                        <ul class="list-disc pl-5 space-y-1.5 text-gray-700 text-sm md:text-base leading-relaxed">
+                            <li>Katalog dan detail paket Haji dan Umrah</li>
+                            <li>Konsultasi melalui WhatsApp</li>
+                            <li>Pendaftaran dan pembayaran melalui aplikasi</li>
+                            <li>Unggah dan pemeriksaan dokumen jamaah</li>
+                            <li>Pengelolaan tiket, visa, dan dokumen SISKOPATUH</li>
+                            <li>Pengelolaan data, pembayaran, dan manifest jamaah</li>
                         </ul>
-                        <p class="text-gray-900 font-medium italic pt-2">
-                            "Jamaah mendapatkan proses yang lebih mudah, sementara administrasi travel menjadi lebih tertata."
+                        <p class="text-gray-700 text-sm md:text-base mt-4 leading-relaxed">
+                            Jamaah mendapatkan proses yang lebih mudah, sementara administrasi travel menjadi lebih tertata.
                         </p>
                     </div>
                 </div>
 
                 <!-- Tahap B: Saat Perjalanan -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-                    <div class="order-2 md:order-1 space-y-3">
-                        <span class="text-amber-600 font-bold text-sm md:text-base tracking-wider uppercase block mb-1">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start pb-16 md:pb-24">
+                    <div class="order-2 md:order-1">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                             B. Saat Perjalanan
-                        </span>
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-snug">
-                            Jamaah Terpantau, Keluarga Lebih Tenang
                         </h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Itinerary & agenda perjalanan</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Informasi serta pengumuman jamaah</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Live tracking posisi jamaah</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Voice Meet untuk komunikasi kelompok</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Koordinasi travel, TL, Mutowif, dan jamaah</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Keluarga dapat memantau posisi & agenda via WhatsApp</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Bantuan koordinasi saat terpisah dari rombongan</span>
-                            </li>
+                        <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">
+                            Jamaah Terpantau, Keluarga Lebih Tenang
+                        </h4>
+                        <ul class="list-disc pl-5 space-y-1.5 text-gray-700 text-sm md:text-base leading-relaxed">
+                            <li>Itinerary dan agenda perjalanan</li>
+                            <li>Informasi serta pengumuman kepada jamaah</li>
+                            <li>Live tracking posisi jamaah</li>
+                            <li>Voice Meet untuk komunikasi kelompok</li>
+                            <li>Koordinasi antara travel, Tour Leader, Mutowif, dan jamaah</li>
+                            <li>Keluarga dapat melihat posisi dan agenda jamaah</li>
+                            <li>Keluarga dapat menghubungi jamaah atau petugas melalui WhatsApp</li>
+                            <li>Bantuan koordinasi ketika jamaah terpisah dari rombongan</li>
                         </ul>
-                        <p class="text-gray-900 font-medium italic pt-2">
-                            "Travel dan petugas lebih mudah mendampingi rombongan, jamaah merasa lebih aman, dan keluarga tetap dapat memantau orang tercinta dari rumah."
+                        <p class="text-gray-700 text-sm md:text-base mt-4 leading-relaxed">
+                            Travel dan petugas lebih mudah mendampingi rombongan, jamaah merasa lebih aman, dan keluarga tetap dapat memantau orang tercinta dari rumah.
                         </p>
                     </div>
                     <div class="order-1 md:order-2">
                         <img src="{{ asset('assets/revisi-landing/image3.jpeg') }}"
                             alt="Saat Perjalanan"
-                            class="w-full h-72 md:h-84 lg:h-96 object-cover rounded-2xl shadow-lg">
+                            class="w-full h-auto rounded-2xl shadow-md object-cover">
                     </div>
                 </div>
 
                 <!-- Tahap C: Setelah Kepulangan -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
                     <div>
                         <img src="{{ asset('assets/revisi-landing/image4.jpeg') }}"
                             alt="Setelah Kepulangan"
-                            class="w-full h-72 md:h-84 lg:h-96 object-cover rounded-2xl shadow-lg">
+                            class="w-full h-auto rounded-2xl shadow-md object-cover">
                     </div>
-                    <div class="space-y-3">
-                        <span class="text-amber-600 font-bold text-sm md:text-base tracking-wider uppercase block mb-1">
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                             C. Setelah Kepulangan
-                        </span>
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-snug">
-                            Hubungan dengan Jamaah Tetap Terjaga
                         </h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Testimoni dan evaluasi perjalanan</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Komunikasi lanjutan via WhatsApp</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Informasi paket & program berikutnya</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Komunitas alumni jamaah</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                                <span class="text-sm md:text-base leading-relaxed">Peluang referral & keberangkatan berikutnya</span>
-                            </li>
+                        <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">
+                            Hubungan dengan Jamaah Tetap Terjaga
+                        </h4>
+                        <ul class="list-disc pl-5 space-y-1.5 text-gray-700 text-sm md:text-base leading-relaxed">
+                            <li>Testimoni dan evaluasi perjalanan</li>
+                            <li>Komunikasi lanjutan melalui WhatsApp</li>
+                            <li>Informasi paket dan program berikutnya</li>
+                            <li>Komunitas alumni jamaah</li>
+                            <li>Peluang referral dan keberangkatan berikutnya</li>
                         </ul>
-                        <p class="text-gray-900 font-medium italic pt-2">
-                            "Pelayanan tidak berhenti setelah kepulangan, tetapi berkembang menjadi hubungan jangka panjang dengan jamaah."
+                        <p class="text-gray-700 text-sm md:text-base mt-4 leading-relaxed">
+                            Pelayanan tidak berhenti setelah kepulangan, tetapi berkembang menjadi hubungan jangka panjang dengan jamaah.
                         </p>
                     </div>
                 </div>
@@ -329,59 +263,59 @@
     </section>
 
     <!-- Section 4: Satu Sistem, Manfaat untuk Semua (Target Pengguna) -->
-    <section class="py-12 md:py-16 bg-gray-50">
+    <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 Satu Sistem, Manfaat untuk Semua
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 md:mb-12 text-base md:text-lg leading-relaxed">
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg leading-relaxed">
                 Haromain menghubungkan travel, Tour Leader/Mutowif, jamaah, dan keluarga dalam satu pelayanan yang terintegrasi.
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 text-center">
                 <!-- Travel -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-start h-full hover:shadow-md transition">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4 bg-amber-50 rounded-xl">
-                        <img src="{{ asset('assets/konten/suitcase.svg') }}" alt="Travel" class="w-8 h-8">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <img src="{{ asset('assets/konten/suitcase.svg') }}" alt="Travel" class="w-12 h-12">
                     </div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">Travel</span>
-                    <h3 class="text-lg font-bold mb-2 text-gray-900">Operasional Lebih Tertata</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Travel</h3>
+                    <h4 class="text-base font-semibold text-gray-800 mb-2">Operasional Lebih Tertata</h4>
                     <p class="text-gray-600 text-sm leading-relaxed">
                         Administrasi, pembayaran, dokumen, manifest, dan perjalanan jamaah dapat dikelola dalam satu sistem.
                     </p>
                 </div>
 
-                <!-- Tour Leader/Mutowif -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-start h-full hover:shadow-md transition">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4 bg-amber-50 rounded-xl">
-                        <img src="{{ asset('assets/konten/map-book.svg') }}" alt="Tour Leader/Mutowif" class="w-8 h-8">
+                <!-- Tour Leader / Mutowif -->
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <img src="{{ asset('assets/konten/map-book.svg') }}" alt="Tour Leader/Mutowif" class="w-12 h-12">
                     </div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">Tour Leader / Mutowif</span>
-                    <h3 class="text-lg font-bold mb-2 text-gray-900">Pendampingan Lebih Terarah</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Tour Leader / Mutowif</h3>
+                    <h4 class="text-base font-semibold text-gray-800 mb-2">Pendampingan Lebih Terarah</h4>
                     <p class="text-gray-600 text-sm leading-relaxed">
                         Itinerary, komunikasi, dan pemantauan jamaah membantu koordinasi rombongan selama perjalanan.
                     </p>
                 </div>
 
                 <!-- Jamaah -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-start h-full hover:shadow-md transition">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4 bg-amber-50 rounded-xl">
-                        <img src="{{ asset('assets/konten/user-group.svg') }}" alt="Jamaah" class="w-8 h-8">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <img src="{{ asset('assets/konten/user-group.svg') }}" alt="Jamaah" class="w-12 h-12">
                     </div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">Jamaah</span>
-                    <h3 class="text-lg font-bold mb-2 text-gray-900">Perjalanan Lebih Nyaman</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Jamaah</h3>
+                    <h4 class="text-base font-semibold text-gray-800 mb-2">Perjalanan Lebih Nyaman</h4>
                     <p class="text-gray-600 text-sm leading-relaxed">
                         Pendaftaran, dokumen, informasi, agenda, dan pendampingan perjalanan tersedia dalam satu aplikasi.
                     </p>
                 </div>
 
                 <!-- Keluarga -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-start h-full hover:shadow-md transition">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4 bg-amber-50 rounded-xl">
-                        <img src="{{ asset('assets/konten/family.svg') }}" alt="Keluarga" class="w-8 h-8">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <img src="{{ asset('assets/konten/family.svg') }}" alt="Keluarga" class="w-12 h-12">
                     </div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1">Keluarga</span>
-                    <h3 class="text-lg font-bold mb-2 text-gray-900">Lebih Tenang dari Rumah</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1">Keluarga</h3>
+                    <h4 class="text-base font-semibold text-gray-800 mb-2">Lebih Tenang dari Rumah</h4>
                     <p class="text-gray-600 text-sm leading-relaxed">
                         Keluarga dapat melihat posisi dan agenda serta menghubungi jamaah atau petugas melalui WhatsApp.
                     </p>
@@ -393,7 +327,7 @@
     <!-- Section 5: Ketika Jamaah Terpisah dari Rombongan (Kondisi Penggunaan) -->
     <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-8 lg:gap-12 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <!-- Video / Thumbnail -->
                 <div>
                     @php
@@ -414,9 +348,9 @@
                     @endphp
 
                     @if ($isYoutube && $youtubeThumbnail)
-                        <a href="{{ $gambarKonten }}" target="_blank" class="block relative group overflow-hidden rounded-2xl shadow-lg">
+                        <a href="{{ $gambarKonten }}" target="_blank" class="block relative group overflow-hidden rounded-2xl shadow-md">
                             <img src="{{ $youtubeThumbnail }}" alt="Video Simulasi Ketika Terpisah dari Rombongan"
-                                class="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition-transform duration-300">
+                                class="w-full h-auto rounded-2xl shadow-md object-cover group-hover:scale-105 transition-transform duration-300">
                             <div
                                 class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-all">
                                 <div
@@ -429,12 +363,12 @@
                         </a>
                     @else
                         <img src="{{ url('assets/konten') }}/{{ $gambarKonten }}" alt="Kondisi Penggunaan"
-                            class="w-full h-64 md:h-80 object-cover rounded-2xl shadow-lg">
+                            class="w-full h-auto rounded-2xl shadow-md object-cover">
                     @endif
                 </div>
 
                 <!-- Text Content -->
-                <div class="space-y-3">
+                <div class="space-y-4">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
                         Ketika Jamaah Terpisah dari Rombongan
                     </h2>
@@ -442,27 +376,12 @@
                         Dalam situasi city tour atau area yang ramai, jamaah dapat terpisah dari rombongan. Video ini menunjukkan bagaimana peta Haromain membantu jamaah menemukan jalan kembali atau memudahkan Mutowif menjemput jamaah berdasarkan posisi yang terpantau.
                     </p>
 
-                    <ul class="space-y-2.5 my-4 text-gray-700">
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Jamaah dapat melihat posisi dan arah melalui peta Haromain.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Jamaah yang mampu menggunakan navigasi dapat kembali menuju titik rombongan.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Mutowif dapat melihat posisi jamaah yang memerlukan bantuan.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Posisi pada peta membantu Mutowif menuju lokasi penjemputan.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></span>
-                            <span class="text-sm md:text-base leading-relaxed">Penanganan dapat dilakukan lebih cepat tanpa meninggalkan koordinasi rombongan.</span>
-                        </li>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm md:text-base leading-relaxed">
+                        <li>Jamaah dapat melihat posisi dan arah melalui peta Haromain.</li>
+                        <li>Jamaah yang mampu menggunakan navigasi dapat kembali menuju titik rombongan.</li>
+                        <li>Mutowif dapat melihat posisi jamaah yang memerlukan bantuan.</li>
+                        <li>Posisi pada peta membantu Mutowif menuju lokasi penjemputan.</li>
+                        <li>Penanganan dapat dilakukan lebih cepat tanpa meninggalkan koordinasi rombongan.</li>
                     </ul>
 
                     <p class="text-gray-900 font-medium leading-relaxed pt-2">
@@ -474,25 +393,18 @@
     </section>
 
     <!-- Section 6: Mitra Travel Haromain -->
-    <section class="py-12 md:py-16 bg-gray-50">
+    <section class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 text-gray-900">
                 Mitra Travel Haromain
             </h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
-                Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.
-            </p>
 
-            <div class="flex justify-center items-center flex-wrap gap-6 md:gap-8">
-                <!-- Logo Haromain -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center hover:shadow-md transition w-52 md:w-60 h-28">
-                    <img src="{{ asset('img/haromain.jpg') }}" alt="Haromain" class="max-h-16 max-w-full object-contain">
-                </div>
+            <div class="flex justify-center items-center flex-wrap gap-12 md:gap-20">
+                <!-- Logo Haromain (Besar) -->
+                <img src="{{ asset('img/haromain.jpg') }}" alt="Haromain" class="w-60 md:w-80 h-auto object-contain">
 
-                <!-- Logo Izzati Tour & Travel -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center hover:shadow-md transition w-52 md:w-60 h-28">
-                    <img src="{{ asset('img/izzati.jpg') }}" alt="Izzati Tour & Travel" class="max-h-16 max-w-full object-contain">
-                </div>
+                <!-- Logo Izzati Tour & Travel (Besar) -->
+                <img src="{{ asset('img/izzati.jpg') }}" alt="Izzati Tour & Travel" class="w-60 md:w-80 h-auto object-contain">
             </div>
         </div>
     </section>
@@ -536,7 +448,7 @@
     </section>
 
     <!-- Section 7: Final CTA Banner -->
-    <section class="py-12 md:py-16 bg-gray-50">
+    <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="bg-linear-to-r from-amber-400 to-amber-500 rounded-3xl p-8 md:p-12 text-center shadow-xl">
                 <h3 class="text-2xl md:text-4xl font-bold text-white mb-3">
