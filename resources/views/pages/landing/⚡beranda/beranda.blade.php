@@ -184,16 +184,30 @@
         </div>
     </section>
 
-    <!-- Section 5: Ketika Jamaah Terpisah dari Rombongan (Kondisi Penggunaan) -->
-    <section class="py-12 md:py-16 bg-white">
+    <!-- Section 5: Ketika Jamaah Terpisah dari Rombongan (Video Modal Player) -->
+    <section class="py-12 md:py-16 bg-white" x-data="{
+        showModal: false,
+        videoId: null,
+        openModal(id) {
+            this.videoId = id;
+            this.showModal = true;
+            document.body.classList.add('overflow-hidden');
+        },
+        closeModal() {
+            this.showModal = false;
+            this.videoId = null;
+            document.body.classList.remove('overflow-hidden');
+        }
+    }">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <!-- Video / Thumbnail -->
+                <!-- Video / Thumbnail Container -->
                 <div>
                     @php
                         $gambarKonten = @$this->kondisiPengguna->GambarKonten ?? 'https://www.youtube.com/watch?v=m-j1LRgaJ7o';
                         $isYoutube = strpos($gambarKonten, 'youtu') !== false;
                         $youtubeThumbnail = null;
+                        $youtubeId = null;
 
                         if ($isYoutube) {
                             preg_match(
@@ -202,27 +216,27 @@
                                 $matches,
                             );
                             if (isset($matches[1])) {
-                                $youtubeThumbnail = "https://img.youtube.com/vi/{$matches[1]}/hqdefault.jpg";
+                                $youtubeId = $matches[1];
+                                $youtubeThumbnail = "https://img.youtube.com/vi/{$youtubeId}/hqdefault.jpg";
                             }
                         }
                     @endphp
 
                     @if ($isYoutube && $youtubeThumbnail)
-                        <a href="{{ $gambarKonten }}" target="_blank" class="block relative group overflow-hidden rounded-2xl shadow-md">
-                            <img src="{{ $youtubeThumbnail }}" alt="Video Simulasi Ketika Terpisah dari Rombongan"
+                        <div @click="openModal('{{ $youtubeId }}')"
+                            class="block relative group overflow-hidden rounded-2xl shadow-md cursor-pointer">
+                            <img src="{{ $youtubeThumbnail }}" alt="{{ @$this->kondisiPengguna->JudulKonten }}"
                                 class="w-full h-auto rounded-2xl shadow-md object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-all">
-                                <div
-                                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-all">
+                                <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                                     <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z" />
                                     </svg>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     @else
-                        <img src="{{ asset('assets/konten/' . $gambarKonten) }}" alt="Kondisi Penggunaan"
+                        <img src="{{ asset('assets/konten/' . $gambarKonten) }}" alt="{{ @$this->kondisiPengguna->JudulKonten }}"
                             class="w-full h-auto rounded-2xl shadow-md object-cover">
                     @endif
                 </div>
@@ -234,6 +248,25 @@
                     </h2>
                     {!! @$this->kondisiPengguna->IsiKonten !!}
                 </div>
+            </div>
+        </div>
+
+        <!-- Modal Video Player Pop-up (Persis Seperti di Galeri) -->
+        <div x-show="showModal" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+            @click.self="closeModal()" x-cloak style="display: none;">
+            <div class="relative w-full max-w-3xl aspect-video bg-black rounded-2xl overflow-hidden mx-4 shadow-2xl">
+                <button @click="closeModal()"
+                    class="absolute top-3 right-3 z-10 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow transition cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <template x-if="videoId">
+                    <iframe :src="'https://www.youtube.com/embed/' + videoId + '?autoplay=1'" title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen class="w-full h-full"></iframe>
+                </template>
             </div>
         </div>
     </section>
