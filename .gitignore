@@ -31,3 +31,14 @@ public/assets
 public/.user.ini
 public/db_haromain_dump.sql
 public/backup_db
+# ==========================================
+# AI AGENT & CONTEXT FILES (Clean Workspace)
+# ==========================================
+AGENTS.md
+GEMINI.md
+PROJECT_MEMORY.md
+*_MEMORY.md
+.antigravityrules
+.cursorrules
+.ai/
+.prompt_history/
