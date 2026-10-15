@@ -23,13 +23,12 @@ class MstKota extends Model
 
     protected $fillable = [
         'IDKota',
-        'IDTravel',
         'NamaKota',
         'IsAktif',
     ];
 
-    protected static $columnOrder  = [null, 'IDKota', 'msttravel.NamaTravel', 'NamaKota', 'IsAktif'];
-    protected static $columnSearch = ['mstkota.NamaKota', 'msttravel.NamaTravel'];
+    protected static $columnOrder  = [null, 'IDKota', 'NamaKota', 'IsAktif'];
+    protected static $columnSearch = ['mstkota.NamaKota'];
     protected static $order        = ['mstkota.NamaKota' => 'asc'];
 
     private $IDKota = null;
@@ -106,13 +105,7 @@ class MstKota extends Model
     public function getDatatablesQuery(Request $request)
     {
         $query = self::query()
-            ->leftJoin('msttravel', 'msttravel.IDTravel', '=', 'mstkota.IDTravel')
-            ->select('mstkota.*', 'msttravel.NamaTravel');
-
-        $user = Auth::user();
-        if ($user && (int)$user->LevelID === 2) {
-            $query->where('mstkota.IDTravel', $user->IDTravel);
-        }
+            ->select('mstkota.*');
 
         if ($request->input('search.value')) {
             $query->where(function ($q) use ($request) {
@@ -146,10 +139,6 @@ class MstKota extends Model
 
     public static function countAllDatatables()
     {
-        $user = Auth::user();
-        if ($user && (int)$user->LevelID === 2) {
-            return self::where('IDTravel', $user->IDTravel)->count();
-        }
         return self::count();
     }
 }

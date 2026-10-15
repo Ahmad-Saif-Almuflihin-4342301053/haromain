@@ -22,9 +22,6 @@
                                         <thead class="bg-lightgray">
                                             <tr>
                                                 <th>No.</th>
-                                                @if(Auth::user()->LevelID == 1)
-                                                    <th>Travel</th>
-                                                @endif
                                                 <th>Nama Kota</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -56,7 +53,7 @@
                     },
                     error: function(xhr, error, thrown) {
                         console.error('DataTables Error:', error);
-                        alert('Terjadi kesalahan saat memuat data.');
+                        toast('error', 'Terjadi kesalahan saat memuat data.');
                     }
                 },
                 columns: [{
@@ -65,13 +62,6 @@
                         searchable: false,
                         className: "text-center"
                     },
-                    @if(Auth::user()->LevelID == 1)
-                    {
-                        data: 'NamaTravel',
-                        name: 'msttravel.NamaTravel',
-                        defaultContent: '-'
-                    },
-                    @endif
                     {
                         data: 'NamaKota'
                     },

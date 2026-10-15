@@ -53,10 +53,7 @@ class LocationController extends Controller
 
         // Admin Travel Pusat
         if ((int)$user->LevelID === 2 && empty($user->IDCabang)) {
-            if ($lokasi === null) {
-                return true;
-            }
-            return $lokasi->IDTravel === $user->IDTravel;
+            return true;
         }
 
         return false;
@@ -64,18 +61,12 @@ class LocationController extends Controller
 
     private function getKotaForCurrentUser()
     {
-        $user = Auth::user();
-        if ($user && (int)$user->LevelID === 2) {
-            return MstKota::where('IDTravel', $user->IDTravel)
-                ->where('IsAktif', 1)
-                ->get();
-        }
         return MstKota::where('IsAktif', 1)->get();
     }
 
     public function getKotaByTravel($idTravel)
     {
-        $kota = MstKota::where('IDTravel', $idTravel)->where('IsAktif', 1)->get();
+        $kota = MstKota::where('IsAktif', 1)->get();
         return response()->json($kota);
     }
 
@@ -98,17 +89,10 @@ class LocationController extends Controller
             abort(403, 'Akses Ditolak');
         }
 
-        $user = Auth::user();
-        $kota = collect();
-        if ((int)$user->LevelID === 2) {
-            $kota = MstKota::where('IDTravel', $user->IDTravel)->where('IsAktif', 1)->get();
-        }
-
         return view('admin-page.location.tambah', [
             'menu' => 'Manajemen Lokasi',
             'kategori_konten' => $this->katkonten->setJenisKonten($this->JenisKonten)->get(),
-            'kota' => $kota,
-            'travel' => MstTravel::where('StatusAkun', 'Aktif')->get()
+            'kota' => $this->getKotaForCurrentUser(),
         ]);
     }
 
@@ -121,22 +105,11 @@ class LocationController extends Controller
             abort(403, 'Anda tidak memiliki hak akses untuk mengedit lokasi ini');
         }
 
-        $user = Auth::user();
-        $kota = collect();
-        if ((int)$user->LevelID === 2) {
-            $kota = MstKota::where('IDTravel', $user->IDTravel)->where('IsAktif', 1)->get();
-        } elseif (!empty($dataKonten->IDTravel)) {
-            $kota = MstKota::where('IDTravel', $dataKonten->IDTravel)->where('IsAktif', 1)->get();
-        } else {
-            $kota = MstKota::where('IsAktif', 1)->get();
-        }
-
         return view('admin-page.location.tambah', [
             'menu' => 'Manajemen Lokasi',
             'data' => $dataKonten,
             'kategori_konten' => $this->katkonten->setJenisKonten($this->JenisKonten)->get(),
-            'kota' => $kota,
-            'travel' => MstTravel::where('StatusAkun', 'Aktif')->get()
+            'kota' => $this->getKotaForCurrentUser(),
         ]);
     }
 
@@ -161,12 +134,6 @@ class LocationController extends Controller
             'Lat' => $request->Lat,
             'Lng' => $request->Lng
         ];
-
-        if ((int)$currentUser->LevelID === 2) {
-            $konten['IDTravel'] = $currentUser->IDTravel;
-        } else {
-            $konten['IDTravel'] = !empty($request->IDTravel) ? $request->IDTravel : null;
-        }
 
         if ($IDKonten) {
             $target = $this->konten->where('IDKonten', $IDKonten)->first();
