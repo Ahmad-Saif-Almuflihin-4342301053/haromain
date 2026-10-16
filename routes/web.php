@@ -38,6 +38,8 @@ use App\Http\Controllers\Admin\Tagihan\TagihantravelController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\GaleriController;
+use App\Http\Controllers\Admin\LandingPageController;
+use App\Http\Controllers\Admin\LandingController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -228,6 +230,13 @@ Route::middleware(['custom'])->prefix('admin')->group(function () {
     Route::post('galeri/setting-halaman', [GaleriController::class, 'simpanSettingHalaman'])->name('admin.galeri.setting.update');
     Route::get('galeri/hapus', [GaleriController::class, 'hapus'])->name('admin.galeri.hapus');
     Route::post('galeri/get', [GaleriController::class, 'get'])->name('admin.galeri.get');
+
+    // Landing Page CMS management routes
+    Route::get('landing', [LandingController::class, 'index'])->name('admin.landing.index');
+    Route::post('landing/get', [LandingController::class, 'get'])->name('admin.landing.get');
+    Route::get('landing/edit/{section?}', [LandingController::class, 'edit'])->name('admin.landing.edit');
+    Route::post('landing/simpan', [LandingController::class, 'simpan'])->name('admin.landing.simpan');
+    Route::get('landing/setaktif', [LandingController::class, 'setaktif'])->name('admin.landing.setaktif');
 
     Route::post('Cabang/get', [CabangController::class, 'get'])->name('admin.cabang.get');
 

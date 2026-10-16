@@ -77,19 +77,7 @@ class BerandaService
 
     public function getMitraTravelList()
     {
-        return MstTravel::where('IsShow', 1)
-            ->where('IsVerified', 1)
-            ->where('StatusAkun', 'Aktif')
-            ->orderBy('NamaTravel', 'ASC')
-            ->get()
-            ->map(function ($item) {
-                return [
-                    'JudulKonten' => $item->NamaTravel,
-                    'IsiKonten' => $item->NamaCP . ' - ' . $item->TelpCP,
-                    'GambarKonten' => $item->LogoKantor,
-                ];
-            })
-            ->toArray();
+        return MstKonten::getLandingMitraTravelList();
     }
 
     public function getTestimonial()
@@ -122,5 +110,39 @@ class BerandaService
     public function getCaraMemulai()
     {
         return MstKonten::getLandingCaraMemulai();
+    }
+
+    public function getGlobalSetting()
+    {
+        $setting = MstKonten::where('JenisKonten', 'LANDING_GLOBAL_SETTING')
+            ->where('IsAktif', 1)
+            ->first();
+
+        $default = [
+            'WhatsApp' => '6287777235337',
+            'WhatsAppText' => '+62 877 7723 5337',
+            'Email' => 'haromainindonesia0@gmail.com',
+            'Instagram' => 'https://www.instagram.com/haromain.indonesia',
+            'Facebook' => 'https://web.facebook.com/profile.php?id=61584806686309',
+            'TikTok' => 'https://www.tiktok.com/@haromain.indonesi?_r=1&_t=ZS-92LGAA16RhB/',
+            'DeskripsiFooter' => 'Haromain adalah platform pendampingan jamaah haji dan umroh yang dikembangkan dari pengalaman serta kondisi nyata di lapangan.',
+            'AppStore' => 'https://apps.apple.com/id/app/haromain/id6736605994',
+            'PlayStore' => 'https://play.google.com/store/apps/details?id=com.tiap.haromain.haromain'
+        ];
+
+        if (!$setting || empty($setting->IsiKonten)) {
+            return $default;
+        }
+
+        try {
+            $decoded = json_decode($setting->IsiKonten, true);
+            if (is_array($decoded)) {
+                return array_merge($default, $decoded);
+            }
+        } catch (\Throwable $e) {
+            // fallback gracefully
+        }
+
+        return $default;
     }
 }

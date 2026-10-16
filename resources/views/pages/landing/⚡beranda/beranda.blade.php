@@ -93,7 +93,7 @@
                 </div>
 
                 <!-- Kolom Kanan: Teks & Poin (Format HTML dari DB) -->
-                <div class="space-y-4">
+                <div class="space-y-3">
                     {!! @$this->memahamiTentang->IsiKonten !!}
                 </div>
             </div>
@@ -106,25 +106,25 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 {{ @$this->peranHaromain->JudulKonten }}
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8 md:mb-10 text-base md:text-lg leading-normal">
                 {!! @$this->peranHaromain->IsiKonten !!}
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
                 @foreach ($this->peranHaromainList as $item)
                     <div class="flex flex-col items-center">
-                        <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 flex items-center justify-center mb-3">
                             <img src="{{ asset('assets/konten/' . $item['GambarKonten']) }}" alt="{{ $item['JudulKonten'] }}" class="w-12 h-12">
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $item['JudulKonten'] }}</h3>
-                        <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        <p class="text-gray-600 leading-normal text-sm md:text-base">
                             {!! $item['IsiKonten'] !!}
                         </p>
                     </div>
                 @endforeach
             </div>
 
-            <p class="text-center text-gray-800 font-medium max-w-2xl mx-auto mt-8 md:mt-10 leading-relaxed">
+            <p class="text-center text-gray-800 font-medium max-w-2xl mx-auto mt-8 md:mt-10 leading-normal">
                 {!! @$this->peranHaromainFooter->IsiKonten !!}
             </p>
         </div>
@@ -136,13 +136,13 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 {{ @$this->fiturUnggulan->JudulKonten }}
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto pb-16 text-base md:text-lg leading-relaxed">
+            <p class="text-center text-gray-600 max-w-3xl mx-auto pb-12 md:pb-16 text-base md:text-lg leading-normal">
                 {!! @$this->fiturUnggulan->IsiKonten !!}
             </p>
 
             <div>
                 @foreach ($this->fiturUnggulanList as $key => $item)
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start {{ $loop->last ? '' : 'pb-16 md:pb-24' }}">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start {{ $loop->last ? '' : 'pb-12 md:pb-16' }}">
                         <div class="{{ $key % 2 == 1 ? 'order-1 md:order-2' : '' }}">
                             <img src="{{ asset('assets/konten/' . ($item['GambarKonten'] ?: 'image' . ($key + 2) . '.jpeg')) }}"
                                 alt="{{ $item['JudulKonten'] }}"
@@ -166,14 +166,14 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 {{ @$this->siapaYang->JudulKonten }}
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg leading-relaxed">
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 md:mb-12 text-base md:text-lg leading-normal">
                 {!! @$this->siapaYang->IsiKonten !!}
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 text-center">
                 @foreach ($this->siapaYangList as $item)
                     <div class="flex flex-col items-center">
-                        <div class="w-16 h-16 flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 flex items-center justify-center mb-3">
                             <img src="{{ asset('assets/konten/' . $item['GambarKonten']) }}" alt="{{ $item['JudulKonten'] }}" class="w-12 h-12">
                         </div>
                         <h3 class="text-xl font-bold text-gray-900 mb-1">{{ $item['JudulKonten'] }}</h3>
@@ -242,7 +242,7 @@
                 </div>
 
                 <!-- Text Content -->
-                <div class="space-y-4">
+                <div class="space-y-3">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
                         {{ @$this->kondisiPengguna->JudulKonten }}
                     </h2>
@@ -272,18 +272,25 @@
     </section>
 
     <!-- Section 6: Mitra Travel Haromain -->
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 text-gray-900">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 Mitra Travel Haromain
             </h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10 md:mb-12 text-sm md:text-base leading-normal">
+                Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.
+            </p>
 
-            <div class="flex justify-center items-center flex-wrap gap-12 md:gap-20">
-                <!-- Logo Haromain (Besar) -->
-                <img src="{{ asset('assets/konten/haromain.jpg') }}" alt="Haromain" class="w-60 md:w-80 h-auto object-contain">
-
-                <!-- Logo Izzati Tour & Travel (Besar) -->
-                <img src="{{ asset('assets/konten/izzati.jpg') }}" alt="Izzati Tour & Travel" class="w-60 md:w-80 h-auto object-contain">
+            <div class="flex justify-center items-center flex-wrap gap-8 md:gap-14 max-w-5xl mx-auto">
+                @forelse ($this->mitraTravelList as $mitra)
+                    <div class="w-48 sm:w-56 md:w-64 h-20 md:h-24 flex items-center justify-center p-2">
+                        <img src="{{ asset('assets/konten/' . $mitra['GambarKonten']) }}" 
+                             alt="{{ $mitra['JudulKonten'] }}" 
+                             class="max-h-full max-w-full object-contain">
+                    </div>
+                @empty
+                    <div class="text-gray-400 text-sm">Belum ada mitra travel terdaftar.</div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -294,7 +301,7 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 {{ @$this->pertanyaan->JudulKonten ?? 'Pertanyaan Umum' }}
             </h2>
-            <p class="text-center text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto text-base md:text-lg">
+            <p class="text-center text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto text-base md:text-lg leading-normal">
                 {{ @$this->pertanyaan->IsiKonten }}
             </p>
 
@@ -316,7 +323,7 @@
                             x-transition:enter-start="opacity-0 transform -translate-y-2"
                             x-transition:enter-end="opacity-100 transform translate-y-0"
                             class="px-6 py-4 bg-gray-50 border-t border-gray-100">
-                            <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                            <p class="text-gray-700 leading-normal text-sm md:text-base">
                                 {{ $pertanyaan['IsiKonten'] }}
                             </p>
                         </div>
@@ -333,7 +340,7 @@
                 <h3 class="text-2xl md:text-4xl font-bold text-white mb-3">
                     Tingkatkan Pelayanan, Tumbuhkan Kepercayaan Jamaah
                 </h3>
-                <p class="text-white/95 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                <p class="text-white/95 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-normal">
                     Hadirkan pelayanan digital yang terintegrasi untuk travel, Tour Leader/Mutowif, jamaah, dan keluarga bersama Haromain.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">

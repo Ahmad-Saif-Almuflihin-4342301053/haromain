@@ -135,8 +135,12 @@
         {{ $slot }}
     </main>
 
+    @php
+        $globalSetting = app(\App\Services\Landing\BerandaService::class)->getGlobalSetting();
+    @endphp
+
     <!-- Floating Konsultasi Button -->
-    <a href="https://api.whatsapp.com/send/?phone=6287777235337" target="_blank"
+    <a href="https://api.whatsapp.com/send/?phone={{ $globalSetting['WhatsApp'] ?? '6287777235337' }}" target="_blank"
         class="fixed bottom-6 right-6 z-50 bg-amber-500 hover:bg-amber-400 text-white px-5 md:px-6 py-2.5 md:py-3 rounded-full shadow-lg flex items-center space-x-1 transition-all duration-300 hover:scale-105">
         <img src="{{ asset('assets/icon/whatsapp.svg') }}" alt="">
         <span class="font-medium text-sm md:text-base">Konsultasi</span>
@@ -150,20 +154,19 @@
                 <div class="space-y-4">
                     <img src="{{ asset('assets/logo/Logo.svg') }}" alt="Haromain Logo" class="h-10">
                     <p class="text-sm text-gray-200 leading-relaxed">
-                        Haromain adalah platform pendampingan jamaah haji dan umroh yang dikembangkan dari pengalaman
-                        serta kondisi nyata di lapangan.
+                        {{ $globalSetting['DeskripsiFooter'] ?? 'Haromain adalah platform pendampingan jamaah haji dan umroh yang dikembangkan dari pengalaman serta kondisi nyata di lapangan.' }}
                     </p>
                     <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/haromain.indonesia"
+                        <a href="{{ $globalSetting['Instagram'] ?? 'https://www.instagram.com/haromain.indonesia' }}"
                             class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition mr-0!">
                             <img src="{{ asset('assets/icon/bxl-instagram-alt.svg') }}" alt="Instagram">
                         </a>
-                        <a href="https://web.facebook.com/profile.php?id=61584806686309"
+                        <a href="{{ $globalSetting['Facebook'] ?? 'https://web.facebook.com/profile.php?id=61584806686309' }}"
                             class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
                             <img src="{{ asset('assets/icon/bxl-facebook-circle.svg') }}" alt="Facebook">
 
                         </a>
-                        <a href="https://www.tiktok.com/@haromain.indonesi?_r=1&_t=ZS-92LGAA16RhB/"
+                        <a href="{{ $globalSetting['TikTok'] ?? 'https://www.tiktok.com/@haromain.indonesi?_r=1&_t=ZS-92LGAA16RhB/' }}"
                             class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition">
                             <img src="{{ asset('assets/icon/bxl-tiktok.svg') }}" alt="TikTok">
                         </a>
@@ -175,20 +178,20 @@
                     <h3 class="text-lg font-semibold mb-4">Kontak</h3>
                     <div class="space-y-3 text-sm text-gray-200">
                         <a class="flex items-center space-x-3"
-                            href="https://api.whatsapp.com/send/?phone=6287777235337" target="_blank">
+                            href="https://api.whatsapp.com/send/?phone={{ $globalSetting['WhatsApp'] ?? '6287777235337' }}" target="_blank">
                             <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
-                            <span>+62 877 7723 5337</span>
+                            <span>{{ $globalSetting['WhatsAppText'] ?? '+62 877 7723 5337' }}</span>
                         </a>
-                        <a class="flex items-center space-x-3" href="mailto:haromainindonesia0@gmail.com"
+                        <a class="flex items-center space-x-3" href="mailto:{{ $globalSetting['Email'] ?? 'haromainindonesia0@gmail.com' }}"
                             target="_blank">
                             <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            <span>haromainindonesia0@gmail.com</span>
+                            <span>{{ $globalSetting['Email'] ?? 'haromainindonesia0@gmail.com' }}</span>
                         </a>
                     </div>
                 </div>
@@ -202,10 +205,10 @@
                         <span class="block hover:text-amber-300 transition">Hak Cipta</span>
                         <!-- App Store & Play Store -->
                         <div class="mt-4 flex space-x-3">
-                            <a href="https://apps.apple.com/id/app/haromain/id6736605994" target="_blank" class="block">
+                            <a href="{{ $globalSetting['AppStore'] ?? 'https://apps.apple.com/id/app/haromain/id6736605994' }}" target="_blank" class="block">
                                 <img src="{{ asset('assets/admin-page/icon/appstore.png') }}" alt="Download on the App Store" class="h-10 w-auto">
                             </a>
-                            <a href="https://play.google.com/store/apps/details?id=com.tiap.haromain.haromain" target="_blank" class="block">
+                            <a href="{{ $globalSetting['PlayStore'] ?? 'https://play.google.com/store/apps/details?id=com.tiap.haromain.haromain' }}" target="_blank" class="block">
                                 <img src="{{ asset('assets/admin-page/icon/gplay.png') }}" alt="Get it on Google Play" class="h-10 w-auto">
                             </a>
                         </div>
