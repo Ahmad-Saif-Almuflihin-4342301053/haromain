@@ -7,10 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Haromain - {{ $menu ?? '' }}</title>
 
+    @php
+        $version = file_exists(public_path('assets/admin-page/css/custom.css'))
+            ? filemtime(public_path('assets/admin-page/css/custom.css'))
+            : time();
+    @endphp
+
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/flag-icon-css/css/flag-icon.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/css/vendor.bundle.base.css?v=' . $version) }}">
     <!-- endinject -->
 
     <!-- Plugin css for this page -->
@@ -33,19 +39,14 @@
     <!-- endinject -->
 
     <!-- Layout styles -->
-    @php
-        $version = file_exists(public_path('assets/admin-page/css/custom.css'))
-            ? filemtime(public_path('assets/admin-page/css/custom.css'))
-            : time();
-    @endphp
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/css/demo_1/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/css/demo_1/style.css?v=' . $version) }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin-page/css/custom.css?v=' . $version) }}">
     <!-- End layout styles -->
 
     <link rel="shortcut icon" href="{{ asset('assets/favicon.ico') }}" />
 
     <!-- plugins:js -->
-    <script src="{{ asset('assets/admin-page/vendors/js/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/js/vendor.bundle.base.js?v=' . $version) }}"></script>
     <!-- endinject -->
 
     <style>

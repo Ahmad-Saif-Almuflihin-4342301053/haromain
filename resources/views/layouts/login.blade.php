@@ -13,22 +13,28 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
+    @php
+        $version = file_exists(public_path('assets/front-page/custom.css'))
+            ? filemtime(public_path('assets/front-page/custom.css'))
+            : time();
+    @endphp
+
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/front-page/css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front-page/icomoon/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/front-page/css/normalize.css?v=' . $version) }}">
+    <link rel="stylesheet" href="{{ asset('assets/front-page/icomoon/icomoon.css?v=' . $version) }}">
     <link rel="stylesheet" media="all"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ asset('assets/front-page/css/vendor.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front-page/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front-page/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/front-page/css/vendor.css?v=' . $version) }}">
+    <link rel="stylesheet" href="{{ asset('assets/front-page/style.css?v=' . $version) }}">
+    <link rel="stylesheet" href="{{ asset('assets/front-page/custom.css?v=' . $version) }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <script src="{{ asset('assets/front-page/js/modernizr.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/front-page/js/modernizr.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/js/jquery.js?v=' . $version) }}"></script>
 
-    <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css?v=' . $version) }}">
 
     @stack('css')
 </head>
