@@ -77,36 +77,24 @@
         </div>
     </section>
 
-    <!-- Section 1: Pelayanan Lebih Baik, Kepercayaan Jamaah Meningkat -->
+    <!-- Section 1: Pelayanan Lebih Baik -->
     <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-10 text-gray-900">
-                Pelayanan Lebih Baik, Kepercayaan Jamaah Meningkat
+                {{ @$this->memahamiTentang->JudulKonten }}
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <!-- Kolom Kiri: Gambar -->
                 <div>
-                    <img src="{{ asset('assets/revisi-landing/image1.jpeg') }}" alt="Pelayanan Lebih Baik"
+                    <img src="{{ asset('assets/konten/' . (@$this->memahamiTentang->GambarKonten ?: 'image1.jpeg')) }}"
+                        alt="{{ @$this->memahamiTentang->JudulKonten }}"
                         class="w-full h-72 md:h-84 lg:h-96 object-cover rounded-2xl shadow-md">
                 </div>
 
-                <!-- Kolom Kanan: Teks & Poin -->
-                <div class="space-y-4">
-                    <p class="text-gray-700 text-base md:text-lg leading-relaxed">
-                        Jamaah dan keluarga tidak hanya mempertimbangkan harga dan fasilitas, tetapi juga kualitas pelayanan, kemudahan memperoleh informasi, serta pendampingan selama perjalanan.
-                    </p>
-
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm md:text-base leading-relaxed">
-                        <li>Administrasi yang rumit dapat memperlambat pelayanan.</li>
-                        <li>Informasi yang tersebar menyulitkan jamaah dan petugas.</li>
-                        <li>Koordinasi perjalanan membutuhkan sistem yang lebih tertata.</li>
-                        <li>Keluarga memerlukan akses informasi tentang perjalanan jamaah.</li>
-                    </ul>
-
-                    <p class="text-gray-900 font-medium leading-relaxed pt-2">
-                        Haromain membantu travel memberikan pelayanan yang lebih terhubung, transparan, dan profesional dalam setiap tahapan perjalanan jamaah.
-                    </p>
+                <!-- Kolom Kanan: Teks & Poin (Format HTML dari DB) -->
+                <div class="space-y-3">
+                    {!! @$this->memahamiTentang->IsiKonten !!}
                 </div>
             </div>
         </div>
@@ -116,49 +104,28 @@
     <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
-                Bukan Sekadar Aplikasi, Haromain Meningkatkan Standar Pelayanan Travel
+                {{ @$this->peranHaromain->JudulKonten }}
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8 md:mb-10 text-base md:text-lg leading-relaxed">
-                Haromain menyatukan pelayanan jamaah dari pendaftaran hingga kepulangan. Travel bekerja lebih tertata, jamaah mendapatkan pelayanan yang lebih baik, dan keluarga merasa lebih tenang.
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8 md:mb-10 text-base md:text-lg leading-normal">
+                {!! @$this->peranHaromain->IsiKonten !!}
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center">
-                <!-- Travel Lebih Profesional -->
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4">
-                        <img src="{{ asset('assets/konten/leadership.svg') }}" alt="Travel" class="w-12 h-12">
+                @foreach ($this->peranHaromainList as $item)
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 flex items-center justify-center mb-3">
+                            <img src="{{ asset('assets/konten/' . $item['GambarKonten']) }}" alt="{{ $item['JudulKonten'] }}" class="w-12 h-12">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $item['JudulKonten'] }}</h3>
+                        <p class="text-gray-600 leading-normal text-sm md:text-base">
+                            {!! $item['IsiKonten'] !!}
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Travel Lebih Profesional</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
-                        Administrasi, pembayaran, dokumen, manifest, dan perjalanan jamaah dikelola dalam satu sistem.
-                    </p>
-                </div>
-
-                <!-- Jamaah Lebih Terlayani -->
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4">
-                        <img src="{{ asset('assets/konten/social-justice.svg') }}" alt="Jamaah" class="w-12 h-12">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Jamaah Lebih Terlayani</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
-                        Informasi, itinerary, dokumen, komunikasi, dan pendampingan tersedia dalam satu aplikasi.
-                    </p>
-                </div>
-
-                <!-- Kepercayaan Semakin Kuat -->
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4">
-                        <img src="{{ asset('assets/konten/check.svg') }}" alt="Kepercayaan" class="w-12 h-12">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Kepercayaan Semakin Kuat</h3>
-                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
-                        Pelayanan yang transparan dan terhubung memberikan alasan lebih kuat bagi masyarakat untuk memilih travel Anda.
-                    </p>
-                </div>
+                @endforeach
             </div>
 
-            <p class="text-center text-gray-800 font-medium max-w-2xl mx-auto mt-8 md:mt-10 leading-relaxed">
-                Ketika pelayanan meningkat, kepercayaan tumbuh—dan peluang mendapatkan lebih banyak jamaah ikut terbuka.
+            <p class="text-center text-gray-800 font-medium max-w-2xl mx-auto mt-8 md:mt-10 leading-normal">
+                {!! @$this->peranHaromainFooter->IsiKonten !!}
             </p>
         </div>
     </section>
@@ -167,97 +134,28 @@
     <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
-                Satu Aplikasi untuk Setiap Tahapan Perjalanan
+                {{ @$this->fiturUnggulan->JudulKonten }}
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto pb-16 text-base md:text-lg leading-relaxed">
-                Haromain membantu travel memberikan pelayanan yang terintegrasi sejak jamaah memilih paket, mempersiapkan keberangkatan, menjalani perjalanan ibadah, hingga kembali ke Tanah Air.
+            <p class="text-center text-gray-600 max-w-3xl mx-auto pb-12 md:pb-16 text-base md:text-lg leading-normal">
+                {!! @$this->fiturUnggulan->IsiKonten !!}
             </p>
 
             <div>
-                <!-- Tahap A: Sebelum Keberangkatan -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start pb-16 md:pb-24">
-                    <div>
-                        <img src="{{ asset('assets/revisi-landing/image2.jpeg') }}"
-                            alt="Sebelum Keberangkatan"
-                            class="w-full h-auto rounded-2xl shadow-md object-cover">
+                @foreach ($this->fiturUnggulanList as $key => $item)
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start {{ $loop->last ? '' : 'pb-12 md:pb-16' }}">
+                        <div class="{{ $key % 2 == 1 ? 'order-1 md:order-2' : '' }}">
+                            <img src="{{ asset('assets/konten/' . ($item['GambarKonten'] ?: 'image' . ($key + 2) . '.jpeg')) }}"
+                                alt="{{ $item['JudulKonten'] }}"
+                                class="w-full h-auto rounded-2xl shadow-md object-cover">
+                        </div>
+                        <div class="{{ $key % 2 == 1 ? 'order-2 md:order-1' : '' }}">
+                            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                                {{ $item['JudulKonten'] }}
+                            </h3>
+                            {!! $item['IsiKonten'] !!}
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                            A. Sebelum Keberangkatan
-                        </h3>
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">
-                            Pendaftaran dan Administrasi Lebih Mudah
-                        </h4>
-                        <ul class="list-disc pl-5 space-y-1.5 text-gray-700 text-sm md:text-base leading-relaxed">
-                            <li>Katalog dan detail paket Haji dan Umrah</li>
-                            <li>Konsultasi melalui WhatsApp</li>
-                            <li>Pendaftaran dan pembayaran melalui aplikasi</li>
-                            <li>Unggah dan pemeriksaan dokumen jamaah</li>
-                            <li>Pengelolaan tiket, visa, dan dokumen SISKOPATUH</li>
-                            <li>Pengelolaan data, pembayaran, dan manifest jamaah</li>
-                        </ul>
-                        <p class="text-gray-700 text-sm md:text-base mt-4 leading-relaxed">
-                            Jamaah mendapatkan proses yang lebih mudah, sementara administrasi travel menjadi lebih tertata.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Tahap B: Saat Perjalanan -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start pb-16 md:pb-24">
-                    <div class="order-2 md:order-1">
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                            B. Saat Perjalanan
-                        </h3>
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">
-                            Jamaah Terpantau, Keluarga Lebih Tenang
-                        </h4>
-                        <ul class="list-disc pl-5 space-y-1.5 text-gray-700 text-sm md:text-base leading-relaxed">
-                            <li>Itinerary dan agenda perjalanan</li>
-                            <li>Informasi serta pengumuman kepada jamaah</li>
-                            <li>Live tracking posisi jamaah</li>
-                            <li>Voice Meet untuk komunikasi kelompok</li>
-                            <li>Koordinasi antara travel, Tour Leader, Mutowif, dan jamaah</li>
-                            <li>Keluarga dapat melihat posisi dan agenda jamaah</li>
-                            <li>Keluarga dapat menghubungi jamaah atau petugas melalui WhatsApp</li>
-                            <li>Bantuan koordinasi ketika jamaah terpisah dari rombongan</li>
-                        </ul>
-                        <p class="text-gray-700 text-sm md:text-base mt-4 leading-relaxed">
-                            Travel dan petugas lebih mudah mendampingi rombongan, jamaah merasa lebih aman, dan keluarga tetap dapat memantau orang tercinta dari rumah.
-                        </p>
-                    </div>
-                    <div class="order-1 md:order-2">
-                        <img src="{{ asset('assets/revisi-landing/image3.jpeg') }}"
-                            alt="Saat Perjalanan"
-                            class="w-full h-auto rounded-2xl shadow-md object-cover">
-                    </div>
-                </div>
-
-                <!-- Tahap C: Setelah Kepulangan -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
-                    <div>
-                        <img src="{{ asset('assets/revisi-landing/image4.jpeg') }}"
-                            alt="Setelah Kepulangan"
-                            class="w-full h-auto rounded-2xl shadow-md object-cover">
-                    </div>
-                    <div>
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                            C. Setelah Kepulangan
-                        </h3>
-                        <h4 class="text-lg md:text-xl font-bold text-gray-900 mb-3">
-                            Hubungan dengan Jamaah Tetap Terjaga
-                        </h4>
-                        <ul class="list-disc pl-5 space-y-1.5 text-gray-700 text-sm md:text-base leading-relaxed">
-                            <li>Testimoni dan evaluasi perjalanan</li>
-                            <li>Komunikasi lanjutan melalui WhatsApp</li>
-                            <li>Informasi paket dan program berikutnya</li>
-                            <li>Komunitas alumni jamaah</li>
-                            <li>Peluang referral dan keberangkatan berikutnya</li>
-                        </ul>
-                        <p class="text-gray-700 text-sm md:text-base mt-4 leading-relaxed">
-                            Pelayanan tidak berhenti setelah kepulangan, tetapi berkembang menjadi hubungan jangka panjang dengan jamaah.
-                        </p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -266,74 +164,50 @@
     <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
-                Satu Sistem, Manfaat untuk Semua
+                {{ @$this->siapaYang->JudulKonten }}
             </h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg leading-relaxed">
-                Haromain menghubungkan travel, Tour Leader/Mutowif, jamaah, dan keluarga dalam satu pelayanan yang terintegrasi.
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 md:mb-12 text-base md:text-lg leading-normal">
+                {!! @$this->siapaYang->IsiKonten !!}
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 text-center">
-                <!-- Travel -->
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4">
-                        <img src="{{ asset('assets/konten/suitcase.svg') }}" alt="Travel" class="w-12 h-12">
+                @foreach ($this->siapaYangList as $item)
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 flex items-center justify-center mb-3">
+                            <img src="{{ asset('assets/konten/' . $item['GambarKonten']) }}" alt="{{ $item['JudulKonten'] }}" class="w-12 h-12">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">{{ $item['JudulKonten'] }}</h3>
+                        {!! $item['IsiKonten'] !!}
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Travel</h3>
-                    <h4 class="text-base font-semibold text-gray-800 mb-2">Operasional Lebih Tertata</h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Administrasi, pembayaran, dokumen, manifest, dan perjalanan jamaah dapat dikelola dalam satu sistem.
-                    </p>
-                </div>
-
-                <!-- Tour Leader / Mutowif -->
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4">
-                        <img src="{{ asset('assets/konten/map-book.svg') }}" alt="Tour Leader/Mutowif" class="w-12 h-12">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Tour Leader / Mutowif</h3>
-                    <h4 class="text-base font-semibold text-gray-800 mb-2">Pendampingan Lebih Terarah</h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Itinerary, komunikasi, dan pemantauan jamaah membantu koordinasi rombongan selama perjalanan.
-                    </p>
-                </div>
-
-                <!-- Jamaah -->
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4">
-                        <img src="{{ asset('assets/konten/user-group.svg') }}" alt="Jamaah" class="w-12 h-12">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Jamaah</h3>
-                    <h4 class="text-base font-semibold text-gray-800 mb-2">Perjalanan Lebih Nyaman</h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Pendaftaran, dokumen, informasi, agenda, dan pendampingan perjalanan tersedia dalam satu aplikasi.
-                    </p>
-                </div>
-
-                <!-- Keluarga -->
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 flex items-center justify-center mb-4">
-                        <img src="{{ asset('assets/konten/family.svg') }}" alt="Keluarga" class="w-12 h-12">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-1">Keluarga</h3>
-                    <h4 class="text-base font-semibold text-gray-800 mb-2">Lebih Tenang dari Rumah</h4>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Keluarga dapat melihat posisi dan agenda serta menghubungi jamaah atau petugas melalui WhatsApp.
-                    </p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <!-- Section 5: Ketika Jamaah Terpisah dari Rombongan (Kondisi Penggunaan) -->
-    <section class="py-12 md:py-16 bg-white">
+    <!-- Section 5: Ketika Jamaah Terpisah dari Rombongan (Video Modal Player) -->
+    <section class="py-12 md:py-16 bg-white" x-data="{
+        showModal: false,
+        videoId: null,
+        openModal(id) {
+            this.videoId = id;
+            this.showModal = true;
+            document.body.classList.add('overflow-hidden');
+        },
+        closeModal() {
+            this.showModal = false;
+            this.videoId = null;
+            document.body.classList.remove('overflow-hidden');
+        }
+    }">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <!-- Video / Thumbnail -->
+                <!-- Video / Thumbnail Container -->
                 <div>
                     @php
                         $gambarKonten = @$this->kondisiPengguna->GambarKonten ?? 'https://www.youtube.com/watch?v=m-j1LRgaJ7o';
                         $isYoutube = strpos($gambarKonten, 'youtu') !== false;
                         $youtubeThumbnail = null;
+                        $youtubeId = null;
 
                         if ($isYoutube) {
                             preg_match(
@@ -342,69 +216,81 @@
                                 $matches,
                             );
                             if (isset($matches[1])) {
-                                $youtubeThumbnail = "https://img.youtube.com/vi/{$matches[1]}/hqdefault.jpg";
+                                $youtubeId = $matches[1];
+                                $youtubeThumbnail = "https://img.youtube.com/vi/{$youtubeId}/hqdefault.jpg";
                             }
                         }
                     @endphp
 
                     @if ($isYoutube && $youtubeThumbnail)
-                        <a href="{{ $gambarKonten }}" target="_blank" class="block relative group overflow-hidden rounded-2xl shadow-md">
-                            <img src="{{ $youtubeThumbnail }}" alt="Video Simulasi Ketika Terpisah dari Rombongan"
+                        <div @click="openModal('{{ $youtubeId }}')"
+                            class="block relative group overflow-hidden rounded-2xl shadow-md cursor-pointer">
+                            <img src="{{ $youtubeThumbnail }}" alt="{{ @$this->kondisiPengguna->JudulKonten }}"
                                 class="w-full h-auto rounded-2xl shadow-md object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-all">
-                                <div
-                                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-all">
+                                <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                                     <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M8 5v14l11-7z" />
                                     </svg>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     @else
-                        <img src="{{ url('assets/konten') }}/{{ $gambarKonten }}" alt="Kondisi Penggunaan"
+                        <img src="{{ asset('assets/konten/' . $gambarKonten) }}" alt="{{ @$this->kondisiPengguna->JudulKonten }}"
                             class="w-full h-auto rounded-2xl shadow-md object-cover">
                     @endif
                 </div>
 
                 <!-- Text Content -->
-                <div class="space-y-4">
+                <div class="space-y-3">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-                        Ketika Jamaah Terpisah dari Rombongan
+                        {{ @$this->kondisiPengguna->JudulKonten }}
                     </h2>
-                    <p class="text-gray-700 leading-relaxed text-base md:text-lg">
-                        Dalam situasi city tour atau area yang ramai, jamaah dapat terpisah dari rombongan. Video ini menunjukkan bagaimana peta Haromain membantu jamaah menemukan jalan kembali atau memudahkan Mutowif menjemput jamaah berdasarkan posisi yang terpantau.
-                    </p>
-
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm md:text-base leading-relaxed">
-                        <li>Jamaah dapat melihat posisi dan arah melalui peta Haromain.</li>
-                        <li>Jamaah yang mampu menggunakan navigasi dapat kembali menuju titik rombongan.</li>
-                        <li>Mutowif dapat melihat posisi jamaah yang memerlukan bantuan.</li>
-                        <li>Posisi pada peta membantu Mutowif menuju lokasi penjemputan.</li>
-                        <li>Penanganan dapat dilakukan lebih cepat tanpa meninggalkan koordinasi rombongan.</li>
-                    </ul>
-
-                    <p class="text-gray-900 font-medium leading-relaxed pt-2">
-                        Haromain tidak menggantikan peran Mutowif, tetapi menjadi alat bantu saat kondisi perjalanan tidak berjalan sesuai rencana.
-                    </p>
+                    {!! @$this->kondisiPengguna->IsiKonten !!}
                 </div>
+            </div>
+        </div>
+
+        <!-- Modal Video Player Pop-up (Persis Seperti di Galeri) -->
+        <div x-show="showModal" x-transition class="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+            @click.self="closeModal()" x-cloak style="display: none;">
+            <div class="relative w-full max-w-3xl aspect-video bg-black rounded-2xl overflow-hidden mx-4 shadow-2xl">
+                <button @click="closeModal()"
+                    class="absolute top-3 right-3 z-10 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow transition cursor-pointer">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <template x-if="videoId">
+                    <iframe :src="'https://www.youtube.com/embed/' + videoId + '?autoplay=1'" title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen class="w-full h-full"></iframe>
+                </template>
             </div>
         </div>
     </section>
 
     <!-- Section 6: Mitra Travel Haromain -->
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 text-gray-900">
-                Mitra Travel Haromain
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
+                {{ @$this->mitraTravelHeader->JudulKonten ?? 'Mitra Travel Haromain' }}
             </h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10 md:mb-12 text-sm md:text-base leading-normal">
+                {{ @$this->mitraTravelHeader->IsiKonten ?? 'Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.' }}
+            </p>
 
             <div class="flex justify-center items-center flex-wrap gap-12 md:gap-20">
-                <!-- Logo Haromain (Besar) -->
-                <img src="{{ asset('img/haromain.jpg') }}" alt="Haromain" class="w-60 md:w-80 h-auto object-contain">
-
-                <!-- Logo Izzati Tour & Travel (Besar) -->
-                <img src="{{ asset('img/izzati.jpg') }}" alt="Izzati Tour & Travel" class="w-60 md:w-80 h-auto object-contain">
+                @forelse ($this->mitraTravelList as $mitra)
+                    <div class="flex items-center justify-center">
+                        <img src="{{ asset('assets/konten/' . $mitra['GambarKonten']) }}" 
+                             alt="{{ $mitra['JudulKonten'] }}" 
+                             class="w-60 md:w-80 h-auto object-contain">
+                    </div>
+                @empty
+                    <div class="text-gray-400 text-sm">Belum ada mitra travel terdaftar.</div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -415,7 +301,7 @@
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 {{ @$this->pertanyaan->JudulKonten ?? 'Pertanyaan Umum' }}
             </h2>
-            <p class="text-center text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto text-base md:text-lg">
+            <p class="text-center text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto text-base md:text-lg leading-normal">
                 {{ @$this->pertanyaan->IsiKonten }}
             </p>
 
@@ -437,7 +323,7 @@
                             x-transition:enter-start="opacity-0 transform -translate-y-2"
                             x-transition:enter-end="opacity-100 transform translate-y-0"
                             class="px-6 py-4 bg-gray-50 border-t border-gray-100">
-                            <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                            <p class="text-gray-700 leading-normal text-sm md:text-base">
                                 {{ $pertanyaan['IsiKonten'] }}
                             </p>
                         </div>
@@ -454,7 +340,7 @@
                 <h3 class="text-2xl md:text-4xl font-bold text-white mb-3">
                     Tingkatkan Pelayanan, Tumbuhkan Kepercayaan Jamaah
                 </h3>
-                <p class="text-white/95 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                <p class="text-white/95 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-normal">
                     Hadirkan pelayanan digital yang terintegrasi untuk travel, Tour Leader/Mutowif, jamaah, dan keluarga bersama Haromain.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">

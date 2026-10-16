@@ -136,7 +136,7 @@ class GaleriController extends Controller
                     'message' => 'Gagal mengupload file!'
                 ]);
             }
-            $dataHeader['GambarKontennetnoKrabmad'] = $upload;
+            $dataHeader['GambarKonten'] = $upload;
             
             if ($request->filled('old_gambar_header')) {
                 if (!filter_var($request->old_gambar_header, FILTER_VALIDATE_URL)) {

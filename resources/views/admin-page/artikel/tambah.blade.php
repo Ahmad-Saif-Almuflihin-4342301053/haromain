@@ -39,22 +39,6 @@
                                     <input type="hidden" name="is_remove" id="is_remove" value="0">
                                 @endif
 
-                                @if (Auth::user()->LevelID == 1)
-                                    {{-- Travel --}}
-                                    <div class="form-group">
-                                        <label for="IDTravel">Perusahaan Travel</label>
-                                        <select name="IDTravel" id="IDTravel" class="form-control select2" required>
-                                            <option value="">Pilih Perusahaan Travel</option>
-                                            @foreach ($travel as $row)
-                                                <option value="{{ $row->IDTravel }}"
-                                                    {{ old("IDTravel", $editMode ? ($data->IDTravel ?? '') : "") == $row->IDTravel ? "selected" : "" }}>
-                                                    {{ $row->NamaTravel }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
-
                                 {{-- Tanggal --}}
                                 <div class="form-group">
                                     <label for="tanggalkonten">Tanggal</label>

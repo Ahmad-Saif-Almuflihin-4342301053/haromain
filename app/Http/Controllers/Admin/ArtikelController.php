@@ -46,10 +46,7 @@ class ArtikelController extends Controller
 
         // Admin Travel Pusat
         if ((int)$user->LevelID === 2 && empty($user->IDCabang)) {
-            if ($artikel === null) {
-                return true;
-            }
-            return $artikel->IDTravel === $user->IDTravel;
+            return true;
         }
 
         return false;
@@ -79,8 +76,7 @@ class ArtikelController extends Controller
             'menu' => 'Manajemen Artikel',
             'kategori_konten' => $this->katkonten
                 ->where('JenisKonten', $this->jenisKonten)
-                ->get(),
-            'travel' => MstTravel::where('StatusAkun', 'Aktif')->get()
+                ->get()
         ]);
     }
 
@@ -99,8 +95,7 @@ class ArtikelController extends Controller
             'data' => $artikel,
             'kategori_konten' => $this->katkonten
                 ->where('JenisKonten', $this->jenisKonten)
-                ->get(),
-            'travel' => MstTravel::where('StatusAkun', 'Aktif')->get()
+                ->get()
         ]);
     }
 
@@ -125,12 +120,6 @@ class ArtikelController extends Controller
             'Lng'           => $request->Lng,
             'NoUrut'        => $request->NoUrut ?? null,
         ];
-
-        if ((int)$currentUser->LevelID === 2) {
-            $data['IDTravel'] = $currentUser->IDTravel;
-        } else {
-            $data['IDTravel'] = !empty($request->IDTravel) ? $request->IDTravel : null;
-        }
 
         if ($request->hasFile('GambarKonten')) {
             $upload = $this->doUpload(

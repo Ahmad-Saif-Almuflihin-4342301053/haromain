@@ -53,9 +53,6 @@
                                     <thead class="bg-lightgray">
                                         <tr>
                                             <th>No.</th>
-                                            @if(Auth::user()->LevelID == 1)
-                                                <th>Travel</th>
-                                            @endif
                                             <th>Lokasi</th>
                                             <th>Gambar</th>
                                             <th>Kategori</th>
@@ -96,7 +93,7 @@
                     d.searchKeyword = $('#search-keyword').val();
                 },
                 error: function () {
-                    alert('Terjadi kesalahan saat memuat data. Silakan coba lagi.');
+                    toast('error', 'Terjadi kesalahan saat memuat data. Silakan coba lagi.');
                 }
             },
             columns: [
@@ -106,13 +103,6 @@
                     searchable: false,
                     className: "text-center"
                 },
-                @if(Auth::user()->LevelID == 1)
-                {
-                    data: 'NamaTravel',
-                    name: 'tr.NamaTravel',
-                    defaultContent: '-'
-                },
-                @endif
                 { data: 'JudulKonten' },
                 {
                     data: null,
