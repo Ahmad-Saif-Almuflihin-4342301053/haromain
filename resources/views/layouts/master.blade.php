@@ -14,24 +14,24 @@
     @endphp
 
     <!-- plugins:css -->
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/mdi/css/materialdesignicons.min.css?v=' . $version) }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/flag-icon-css/css/flag-icon.min.css?v=' . $version) }}">
     <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/css/vendor.bundle.base.css?v=' . $version) }}">
     <!-- endinject -->
 
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/jquery-bar-rating/css-stars.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/jquery-bar-rating/css-stars.css?v=' . $version) }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/font-awesome/css/font-awesome.min.css?v=' . $version) }}" />
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/select2/select2.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/datatable/datatable.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/select2/select2.min.css?v=' . $version) }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/datatable/datatable.css?v=' . $version) }}" />
     <link rel="stylesheet"
-        href="{{ asset('assets/admin-page/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/datepicker/datepicker.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/toggle/toggle.css') }}" />
+        href="{{ asset('assets/admin-page/vendors/select2-bootstrap-theme/select2-bootstrap.min.css?v=' . $version) }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/datepicker/datepicker.css?v=' . $version) }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css?v=' . $version) }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin-page/vendors/toggle/toggle.css?v=' . $version) }}" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/imgareaselect/0.9.10/css/imgareaselect-default.css"
@@ -70,33 +70,33 @@
     <!-- container-scroller -->
 
     <!-- Plugin js for this page -->
-    <script src="{{ asset('assets/admin-page/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.categories.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.fillbetween.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.stack.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/jquery-bar-rating/jquery.barrating.min.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/chart.js/Chart.min.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.resize.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.categories.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.fillbetween.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/flot/jquery.flot.stack.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/select2/select2.min.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/js/sweetalert2.all.min.js?v=' . $version) }}"></script>
 
     <!-- inject:js -->
-    <script src="{{ asset('assets/admin-page/js/off-canvas.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/js/misc.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/js/file-upload.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/datatable/jquery.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/datatable/datatable.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/datatable/buttons.min.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/datatable/jszip.min.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/datatable/buttons-html5.min.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/datepicker/datepicker.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/vendors/toggle/toggle.js') }}"></script>
+    <script src="{{ asset('assets/admin-page/js/off-canvas.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/js/hoverable-collapse.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/js/misc.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/js/file-upload.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/datatable/jquery.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/datatable/datatable.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/datatable/buttons.min.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/datatable/jszip.min.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/datatable/buttons-html5.min.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/datepicker/datepicker.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/vendors/toggle/toggle.js?v=' . $version) }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="{{ asset('assets/admin-page/js/selectarea.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/js/crop.js') }}"></script>
-    <script src="{{ asset('assets/admin-page/js/sidebar-active.js') }}"></script>
+    <script src="{{ asset('assets/admin-page/js/selectarea.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/js/crop.js?v=' . $version) }}"></script>
+    <script src="{{ asset('assets/admin-page/js/sidebar-active.js?v=' . $version) }}"></script>
 
 
     <script>
