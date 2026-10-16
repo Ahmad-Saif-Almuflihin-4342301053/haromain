@@ -153,9 +153,9 @@
                 <!-- Company Info -->
                 <div class="space-y-4">
                     <img src="{{ asset('assets/logo/Logo.svg') }}" alt="Haromain Logo" class="h-10">
-                    <p class="text-sm text-gray-200 leading-relaxed">
-                        {{ $globalSetting['DeskripsiFooter'] ?? 'Haromain adalah platform pendampingan jamaah haji dan umroh yang dikembangkan dari pengalaman serta kondisi nyata di lapangan.' }}
-                    </p>
+                    <div class="text-sm text-gray-200 leading-normal">
+                        {!! $globalSetting['DeskripsiFooter'] ?? $globalSetting['description'] !!}
+                    </div>
                     <div class="flex space-x-4">
                         <a href="{{ $globalSetting['Instagram'] ?? 'https://www.instagram.com/haromain.indonesia' }}"
                             class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition mr-0!">

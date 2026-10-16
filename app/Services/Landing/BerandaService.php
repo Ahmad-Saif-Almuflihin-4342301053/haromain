@@ -75,6 +75,13 @@ class BerandaService
         return MstKonten::getLandingKondisiPengguna();
     }
 
+    public function getMitraTravelHeader()
+    {
+        return MstKonten::where('JenisKonten', 'LANDING_MITRA_TRAVEL')
+            ->where('IsAktif', 1)
+            ->first();
+    }
+
     public function getMitraTravelList()
     {
         return MstKonten::getLandingMitraTravelList();
@@ -137,7 +144,18 @@ class BerandaService
         try {
             $decoded = json_decode($setting->IsiKonten, true);
             if (is_array($decoded)) {
-                return array_merge($default, $decoded);
+                $mapped = [
+                    'WhatsApp'        => $decoded['whatsapp'] ?? $decoded['WhatsApp'] ?? $default['WhatsApp'],
+                    'WhatsAppText'    => $decoded['whatsapp_text'] ?? $decoded['WhatsAppText'] ?? ('+' . ($decoded['whatsapp'] ?? $default['WhatsApp'])),
+                    'Email'           => $decoded['email'] ?? $decoded['Email'] ?? $default['Email'],
+                    'Instagram'       => $decoded['instagram'] ?? $decoded['Instagram'] ?? $default['Instagram'],
+                    'Facebook'        => $decoded['facebook'] ?? $decoded['Facebook'] ?? $default['Facebook'],
+                    'TikTok'          => $decoded['tiktok'] ?? $decoded['TikTok'] ?? $default['TikTok'],
+                    'DeskripsiFooter' => $decoded['description'] ?? $decoded['DeskripsiFooter'] ?? $default['DeskripsiFooter'],
+                    'AppStore'        => $decoded['appstore'] ?? $decoded['AppStore'] ?? $default['AppStore'],
+                    'PlayStore'       => $decoded['playstore'] ?? $decoded['PlayStore'] ?? $default['PlayStore'],
+                ];
+                return array_merge($default, $decoded, $mapped);
             }
         } catch (\Throwable $e) {
             // fallback gracefully

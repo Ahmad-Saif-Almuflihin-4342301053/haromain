@@ -149,7 +149,7 @@ class LandingController extends Controller
                 'no' => 6,
                 'name' => 'Section 6 (Mitra Travel Haromain)',
                 'description' => 'Logo dan profil Mitra Travel yang bekerjasama dengan Haromain',
-                'types' => ['LANDING_MITRA_TRAVEL_LIST'],
+                'types' => ['LANDING_MITRA_TRAVEL', 'LANDING_MITRA_TRAVEL_LIST'],
                 'slug' => 'section-6'
             ],
             'footer' => [
@@ -309,7 +309,8 @@ class LandingController extends Controller
         // =========================================================================
         // AGGREGATE 6: SECTION 6 (Mitra Travel Haromain)
         // =========================================================================
-        if (in_array($slug, ['section-6', 'section6', 'landing_mitra_travel_list'])) {
+        if (in_array($slug, ['section-6', 'section6', 'landing_mitra_travel', 'landing_mitra_travel_list'])) {
+            $header = MstKonten::where('JenisKonten', 'LANDING_MITRA_TRAVEL')->first();
             $list = MstKonten::where('JenisKonten', 'LANDING_MITRA_TRAVEL_LIST')
                 ->orderBy('TanggalKonten', 'ASC')
                 ->get();
@@ -318,6 +319,7 @@ class LandingController extends Controller
                 'menu' => 'Manajemen Landing',
                 'section' => 'section-6',
                 'title' => 'Seksi 6: Mitra Travel Haromain',
+                'header' => $header,
                 'list' => $list,
             ]);
         }
@@ -696,7 +698,32 @@ class LandingController extends Controller
 
     protected function simpanSection6(Request $request)
     {
-        // 1. Handle deleted_ids
+        // 1. Simpan/update header
+        if ($request->filled('header_JudulKonten')) {
+            $header = MstKonten::where('JenisKonten', 'LANDING_MITRA_TRAVEL')->lockForUpdate()->first();
+            if ($header) {
+                $header->update([
+                    'JudulKonten'   => $request->header_JudulKonten,
+                    'IsiKonten'     => $request->header_IsiKonten,
+                    'TanggalKonten' => now()->format('Y-m-d'),
+                    'IsAktif'       => 1,
+                    'Author'        => Auth::user()->name ?? 'Admin',
+                ]);
+            } else {
+                $headerId = $this->konten->generateID();
+                MstKonten::create([
+                    'IDKonten'      => $headerId,
+                    'JenisKonten'   => 'LANDING_MITRA_TRAVEL',
+                    'JudulKonten'   => $request->header_JudulKonten,
+                    'IsiKonten'     => $request->header_IsiKonten,
+                    'TanggalKonten' => now()->format('Y-m-d'),
+                    'IsAktif'       => 1,
+                    'Author'        => Auth::user()->name ?? 'Admin',
+                ]);
+            }
+        }
+
+        // 2. Handle deleted_ids
         if ($request->filled('deleted_ids')) {
             $delIds = is_array($request->deleted_ids)
                 ? $request->deleted_ids

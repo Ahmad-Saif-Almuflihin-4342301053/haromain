@@ -432,6 +432,23 @@
                             {{-- SECTION 6: MITRA TRAVEL HAROMAIN --}}
                             {{-- ========================================================================= --}}
                             @if ($section === 'section-6')
+                                <div class="card-container mb-4">
+                                    <div class="card-container-header">
+                                        <span><i class="fa fa-header mr-2 text-primary"></i>Judul & Deskripsi Seksi Mitra Travel</span>
+                                    </div>
+                                    <div class="card-container-body">
+                                        <div class="form-group">
+                                            <label class="font-weight-bold">Judul Seksi <span class="text-danger">*</span></label>
+                                            <input type="text" name="header_JudulKonten" class="form-control"
+                                                value="{{ @$header->JudulKonten ?? 'Mitra Travel Haromain' }}" required>
+                                        </div>
+                                        <div class="form-group mb-0">
+                                            <label class="font-weight-bold">Deskripsi / Subjudul Seksi</label>
+                                            <textarea name="header_IsiKonten" class="form-control" rows="3">{{ @$header->IsiKonten ?? 'Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.' }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="card-container">
                                     <div class="card-container-header d-flex justify-content-between align-items-center">
                                         <span><i class="fa fa-building-o mr-2 text-primary"></i>Mitra Travel Resmi</span>

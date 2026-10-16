@@ -275,10 +275,10 @@
     <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
-                Mitra Travel Haromain
+                {{ @$this->mitraTravelHeader->JudulKonten ?? 'Mitra Travel Haromain' }}
             </h2>
             <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10 md:mb-12 text-sm md:text-base leading-normal">
-                Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.
+                {{ @$this->mitraTravelHeader->IsiKonten ?? 'Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.' }}
             </p>
 
             <div class="flex justify-center items-center flex-wrap gap-12 md:gap-20">
