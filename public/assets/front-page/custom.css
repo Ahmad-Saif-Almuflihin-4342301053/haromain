@@ -1,0 +1,270 @@
+.btn-yellow {
+    display: flex !important;
+    width: 139px;
+    padding: 10px 20px !important;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 6px;
+    background: var(--coklat-logo, #E5A11D);
+    color: var(--default-white, #FFF) !important;
+    text-align: center;
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 600 !important;
+    line-height: 20px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1ce88;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #e5a11d;
+    ;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #f1a000d6;
+    ;
+}
+
+
+.btn-yellow:hover {
+    background: #ffb932;
+}
+
+.bg-cover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.overlay-black {
+    height: 100vh;
+    background-color: #00000075;
+}
+
+.login-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem 2rem 0 2rem;
+}
+
+.login-info {
+    width: 100%;
+}
+
+.login-form {
+    width: 100%;
+    display: flex;
+}
+
+.login-logo {
+    border-radius: 20px;
+    background: #FFF;
+    padding: 20px;
+    width: fit-content;
+}
+
+.login-p1 {
+    color: #FFF;
+    font-size: 39.06px;
+    font-weight: 700;
+    line-height: 46.87px;
+}
+
+.login-p2 {
+    color: #FFF;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28.16px;
+}
+
+.login-card {
+    border-radius: 24px 24px 0px 0px;
+    background: #FAFAFA;
+    padding: 2rem 2rem 2rem 2rem;
+    width: 100%;
+}
+
+.login-header {
+    color: #000;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+}
+
+.login-input-group {
+    border-radius: 8px;
+    border: 1px solid #BDBDBD;
+    width: 100%;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28.16px;
+    margin-bottom: 1.5rem;
+}
+
+.login-input {
+    margin: 0;
+    width: 100%;
+}
+
+.password-input {
+    margin: 0;
+    width: 90%;
+    border: none !important;
+}
+
+.password-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+
+}
+
+.login-label {
+    color: #757575;
+    font-size: 12.8px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22.53px;
+    background: #fafafa;
+    position: absolute;
+    margin: -10px 0 0 15px;
+    padding: 0 10px;
+}
+
+.btn-black {
+    border-radius: 8px;
+    background: #212121;
+    width: 100%;
+    display: block;
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22.53px;
+    padding: 12px;
+}
+
+.btn-black:hover {
+    text-decoration: none;
+    color: white;
+    background: #e5a11d;
+}
+
+.btn-link {
+    float: right;
+    font-size: 12px;
+    margin: 5px 0;
+    font-weight: 600;
+    background-color: transparent;
+    color: black;
+}
+
+.btn-link:hover {
+    color: #e5a11d;
+}
+
+.container {
+    width: 90%;
+}
+
+.overlay-hitam :before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: black;
+    opacity: 0.05;
+}
+
+img.brand-image {
+    max-width: 100%;
+    height: 100px;
+    margin: 20px;
+    /* width: auto; */
+}
+
+#billboard .button-prev:hover,
+#billboard .button-next:hover {
+    color: var(--light-color);
+    background-color: #e5a11d;
+}
+
+.section-title {
+    font-size: 33px;
+    font-weight: 700;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.text-black {
+    color: black !important;
+}
+
+.mb-1 {
+    margin-bottom: 1rem !important;
+}
+
+.stellarnav li {
+    margin: 1rem !important;
+}
+
+#billboard .button-prev,
+#billboard .button-next {
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 12px;
+    height: 50px;
+    z-index: 2;
+    margin: auto;
+    padding: 10px;
+    background: white;
+    color: #191919;
+    border-radius: 100%;
+    width: 50px;
+}
+
+.preloader-wrapper {
+	position: fixed;
+}
+
+@media only screen and (min-width: 770px) {
+    .login-info {
+        width: 60%;
+        padding: 2rem;
+    }
+
+    .login-form {
+        width: 40%;
+        margin-top: 6rem;
+    }
+
+    .login-container {
+        padding: 2rem 5rem 0 5rem;
+        position: fixed;
+        bottom: 0;
+    }
+}
