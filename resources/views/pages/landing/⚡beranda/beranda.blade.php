@@ -281,12 +281,12 @@
                 Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.
             </p>
 
-            <div class="flex justify-center items-center flex-wrap gap-8 md:gap-14 max-w-5xl mx-auto">
+            <div class="flex justify-center items-center flex-wrap gap-12 md:gap-20">
                 @forelse ($this->mitraTravelList as $mitra)
-                    <div class="w-48 sm:w-56 md:w-64 h-20 md:h-24 flex items-center justify-center p-2">
+                    <div class="flex items-center justify-center">
                         <img src="{{ asset('assets/konten/' . $mitra['GambarKonten']) }}" 
                              alt="{{ $mitra['JudulKonten'] }}" 
-                             class="max-h-full max-w-full object-contain">
+                             class="w-60 md:w-80 h-auto object-contain">
                     </div>
                 @empty
                     <div class="text-gray-400 text-sm">Belum ada mitra travel terdaftar.</div>
