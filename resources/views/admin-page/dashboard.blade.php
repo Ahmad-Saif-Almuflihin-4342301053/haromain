@@ -13,7 +13,7 @@
                             <div class="col-md-4 p-3 pl-4">
                                 <div class="h4">Jumlah Agen</div>
                                 <div class="d-flex">
-                                    <img src="{{ asset('assets/admin-page/icon/mdi_face-agent.svg') }}" class="mr-2" alt="">
+                                    <img src="{{ asset('assets/admin-page/icon/mdi_face-agent.svg') }}?v={{ $version ?? 'v2' }}" class="mr-2" alt="">
                                     <span class="h2 text-white">{{ $totalAgen }}</span>
                                 </div>
                             </div>
@@ -21,13 +21,13 @@
                                 <div class="h4">Jumlah Jama'ah</div>
                                 <div class="d-flex">
                                     <div class="w-50">
-                                        <img src="{{ asset('assets/admin-page/icon/fluent_people-community-48-regular.svg') }}" class="mr-2" alt="">
+                                        <img src="{{ asset('assets/admin-page/icon/fluent_people-community-48-regular.svg') }}?v={{ $version ?? 'v2' }}" class="mr-2" alt="">
                                         <span class="h2 text-white">{{ $totalJamaah }}</span>
                                     </div>
                                     <div class="w-50 text-right">
                                         <div class="align-self-center bg-brown text-white rounded-pill px-3 py-1 d-inline">
                                             {{ $selisihBooking > 0 ? '+' : '' }}{{ $selisihBooking }}
-                                            <img class="{{ $selisihBooking < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}" alt="">
+                                            <img class="{{ $selisihBooking < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}?v={{ $version ?? 'v2' }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -36,13 +36,13 @@
                                 <div class="h4">Jumlah Jama'ah Tracking</div>
                                 <div class="d-flex">
                                     <div class="w-50">
-                                        <img src="{{ asset('assets/admin-page/icon/fluent_people-community-48-regular.svg') }}" class="mr-2" alt="">
+                                        <img src="{{ asset('assets/admin-page/icon/fluent_people-community-48-regular.svg') }}?v={{ $version ?? 'v2' }}" class="mr-2" alt="">
                                         <span class="h2 text-white">{{ $totalJamaahTracking }}</span>
                                     </div>
                                     <div class="w-50 text-right">
                                         <div class="align-self-center bg-brown text-white rounded-pill px-3 py-1 d-inline">
                                             {{ $selisihTracking > 0 ? '+' : '' }}{{ $selisihTracking }}
-                                            <img class="{{ $selisihTracking < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}" alt="">
+                                            <img class="{{ $selisihTracking < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}?v={{ $version ?? 'v2' }}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -58,13 +58,13 @@
                                             <span class="h3 text-primary">{{ $totalPersiapan }}</span> Paket
                                         </div>
                                         <div class="w-25">
-                                            <img class="w-100" style="max-width: 50px;" src="{{ asset('assets/admin-page/icon/uil_package.svg') }}" alt="">
+                                            <img class="w-100" style="max-width: 50px;" src="{{ asset('assets/admin-page/icon/uil_package.svg') }}?v={{ $version ?? 'v2' }}" alt="">
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="align-self-baseline bg-brown text-white rounded-pill px-3 py-1 d-inline">
                                         {{ $selisihPersiapan > 0 ? '+' : '' }}{{ $selisihPersiapan }}
-                                        <img class="{{ $selisihPersiapan < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}" alt="">
+                                        <img class="{{ $selisihPersiapan < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}?v={{ $version ?? 'v2' }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -77,13 +77,13 @@
                                             <span class="h3 text-primary">{{ $totalPerjalanan }}</span> Paket
                                         </div>
                                         <div class="w-25">
-                                            <img class="w-100" style="max-width: 50px;" src="{{ asset('assets/admin-page/icon/uil_package.svg') }}" alt="">
+                                            <img class="w-100" style="max-width: 50px;" src="{{ asset('assets/admin-page/icon/uil_package.svg') }}?v={{ $version ?? 'v2' }}" alt="">
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="align-self-baseline bg-brown text-white rounded-pill px-3 py-1 d-inline">
                                         {{ $selisihPerjalanan > 0 ? '+' : '' }}{{ $selisihPerjalanan }}
-                                        <img class="{{ $selisihPerjalanan < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}" alt="">
+                                        <img class="{{ $selisihPerjalanan < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}?v={{ $version ?? 'v2' }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -96,13 +96,13 @@
                                             <span class="h3 text-primary">{{ $totalSelesai }}</span> Paket
                                         </div>
                                         <div class="w-25">
-                                            <img class="w-100" style="max-width: 50px;" src="{{ asset('assets/admin-page/icon/uil_package.svg') }}" alt="">
+                                            <img class="w-100" style="max-width: 50px;" src="{{ asset('assets/admin-page/icon/uil_package.svg') }}?v={{ $version ?? 'v2' }}" alt="">
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="align-self-baseline bg-brown text-white rounded-pill px-3 py-1 d-inline">
                                         {{ $selisihSelesai > 0 ? '+' : '' }}{{ $selisihSelesai }}
-                                        <img class="{{ $selisihSelesai < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}" alt="">
+                                        <img class="{{ $selisihSelesai < 0 ? 'rotate-90' : '' }}" src="{{ asset('assets/admin-page/icon/ph_trend-up-thin.svg') }}?v={{ $version ?? 'v2' }}" alt="">
                                     </div>
                                 </div>
                             </div>

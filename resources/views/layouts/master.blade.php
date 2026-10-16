@@ -9,7 +9,7 @@
 
     @php
         $version = file_exists(public_path('assets/admin-page/css/custom.css'))
-            ? filemtime(public_path('assets/admin-page/css/custom.css'))
+            ? filemtime(public_path('assets/admin-page/css/custom.css')) . '_v2'
             : time();
     @endphp
 

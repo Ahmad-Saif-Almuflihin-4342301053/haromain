@@ -32,7 +32,7 @@
         <li class="nav-item nav-profile">
             <a href="#" class="nav-link flex-column">
                 <div>
-                    <img src="{{ asset('assets/haromainv0.png') }}" class="img-fluid" alt="">
+                    <img src="{{ asset('assets/haromainv0.png') }}?v={{ $version ?? 'v2' }}" class="img-fluid" alt="">
                 </div>
             </a>
         </li>
@@ -67,7 +67,7 @@
                            aria-controls="submenu{{ $row->FiturID }}"
                        @else
                            href="{{ url($row->URL) }}" @endif>
-                        <img class="pr-2" src="{{ asset('assets/admin-page/icon/' . $row->Icon) }}"
+                        <img class="pr-2" src="{{ asset('assets/admin-page/icon/' . $row->Icon) }}?v={{ $version ?? 'v2' }}"
                             style="width: 35px;">
                         <span class="menu-title">{{ $row->FiturName }}</span>
                         @if ($hasSubmenu)
