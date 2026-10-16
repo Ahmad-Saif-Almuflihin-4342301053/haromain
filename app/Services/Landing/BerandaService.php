@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services\Landing;
+
 use App\Models\MstKonten;
 use App\Models\MstBanner;
 use App\Models\MstTravel;
@@ -10,9 +11,7 @@ class BerandaService
     /**
      * Create a new class instance.
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function getSlider()
     {
@@ -121,7 +120,7 @@ class BerandaService
         $default = [
             'WhatsApp' => '6287777235337',
             'WhatsAppText' => '+62 877 7723 5337',
-            'Email' => 'haromainindonesia0@gmail.com',
+            'Email' => 'haromain@afindo-inf.com',
             'Instagram' => 'https://www.instagram.com/haromain.indonesia',
             'Facebook' => 'https://web.facebook.com/profile.php?id=61584806686309',
             'TikTok' => 'https://www.tiktok.com/@haromain.indonesi?_r=1&_t=ZS-92LGAA16RhB/',

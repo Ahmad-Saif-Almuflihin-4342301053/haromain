@@ -131,7 +131,7 @@
     </section>
 
     <!-- Section 3: Satu Aplikasi untuk Setiap Tahapan Perjalanan (Fitur Unggulan) -->
-    <section class="py-12 md:py-16 bg-white">
+    <section id="fitur" class="py-12 md:py-16 bg-white scroll-mt-20">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
                 {{ @$this->fiturUnggulan->JudulKonten }}
@@ -296,7 +296,7 @@
     </section>
 
     <!-- Section FAQ -->
-    <section class="py-4 md:py-6 bg-white">
+    <section id="faq" class="py-4 md:py-6 bg-white scroll-mt-20">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 md:mb-3 text-gray-900">
                 {{ @$this->pertanyaan->JudulKonten ?? 'Pertanyaan Umum' }}
