@@ -185,7 +185,7 @@
     </section>
 
     <!-- Section 5: Ketika Jamaah Terpisah dari Rombongan (Video Modal Player) -->
-    <section class="py-12 md:py-16 bg-white" x-data="{
+    <section class="pt-10 pb-6 md:pt-14 md:pb-8 bg-white" x-data="{
         showModal: false,
         videoId: null,
         openModal(id) {
@@ -272,21 +272,21 @@
     </section>
 
     <!-- Section 6: Mitra Travel Haromain -->
-    <section class="py-12 md:py-16 bg-white">
+    <section class="py-4 md:py-6 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 md:mb-3 text-gray-900">
                 Mitra Travel Haromain
             </h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10 md:mb-12 text-sm md:text-base leading-normal">
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-4 md:mb-6 text-sm md:text-base leading-normal">
                 Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.
             </p>
 
-            <div class="flex justify-center items-center flex-wrap gap-12 md:gap-20">
+            <div class="flex justify-center items-center flex-wrap gap-8 md:gap-12">
                 @forelse ($this->mitraTravelList as $mitra)
                     <div class="flex items-center justify-center">
                         <img src="{{ asset('assets/konten/' . $mitra['GambarKonten']) }}" 
                              alt="{{ $mitra['JudulKonten'] }}" 
-                             class="w-60 md:w-80 h-auto object-contain">
+                             class="w-48 md:w-64 h-auto object-contain">
                     </div>
                 @empty
                     <div class="text-gray-400 text-sm">Belum ada mitra travel terdaftar.</div>
@@ -296,20 +296,20 @@
     </section>
 
     <!-- Section FAQ -->
-    <section class="py-12 md:py-16 bg-white">
+    <section class="py-4 md:py-6 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-gray-900">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 md:mb-3 text-gray-900">
                 {{ @$this->pertanyaan->JudulKonten ?? 'Pertanyaan Umum' }}
             </h2>
-            <p class="text-center text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto text-base md:text-lg leading-normal">
+            <p class="text-center text-gray-600 mb-4 md:mb-6 max-w-2xl mx-auto text-base md:text-lg leading-normal">
                 {{ @$this->pertanyaan->IsiKonten }}
             </p>
 
-            <div class="max-w-3xl mx-auto space-y-4" x-data="{ openFaq: 0 }">
+            <div class="max-w-3xl mx-auto space-y-3" x-data="{ openFaq: 0 }">
                 @foreach ($this->pertanyaanList as $key => $pertanyaan)
                     <div class="border border-gray-200 rounded-xl overflow-hidden shadow-xs">
                         <button @click="openFaq = openFaq === {{ $key }} ? null : {{ $key }}"
-                            class="w-full px-6 py-4 text-left bg-white hover:bg-gray-50 transition flex justify-between items-center cursor-pointer">
+                            class="w-full px-5 py-3 md:py-3.5 text-left bg-white hover:bg-gray-50 transition flex justify-between items-center cursor-pointer">
                             <span class="font-semibold text-gray-900">{{ $pertanyaan['JudulKonten'] }}</span>
                             <svg class="w-5 h-5 text-gray-500 transition-transform duration-200"
                                 :class="{ 'rotate-180': openFaq === {{ $key }} }" fill="none"
@@ -322,7 +322,7 @@
                             x-transition:enter="transition ease-out duration-300"
                             x-transition:enter-start="opacity-0 transform -translate-y-2"
                             x-transition:enter-end="opacity-100 transform translate-y-0"
-                            class="px-6 py-4 bg-gray-50 border-t border-gray-100">
+                            class="px-5 py-3.5 bg-gray-50 border-t border-gray-100">
                             <p class="text-gray-700 leading-normal text-sm md:text-base">
                                 {{ $pertanyaan['IsiKonten'] }}
                             </p>
@@ -334,19 +334,19 @@
     </section>
 
     <!-- Section 7: Final CTA Banner -->
-    <section class="py-12 md:py-16 bg-white">
+    <section class="pt-2 pb-8 md:pt-4 md:pb-12 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="bg-linear-to-r from-amber-400 to-amber-500 rounded-3xl p-8 md:p-12 text-center shadow-xl">
-                <h3 class="text-2xl md:text-4xl font-bold text-white mb-3">
+            <div class="bg-linear-to-r from-amber-400 to-amber-500 rounded-3xl p-6 md:p-8 text-center shadow-xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 md:mb-3 text-gray-900">
                     Tingkatkan Pelayanan, Tumbuhkan Kepercayaan Jamaah
-                </h3>
-                <p class="text-white/95 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-normal">
+                </h2>
+                <p class="text-white/95 text-base md:text-lg max-w-2xl mx-auto mb-6 leading-normal">
                     Hadirkan pelayanan digital yang terintegrasi untuk travel, Tour Leader/Mutowif, jamaah, dan keluarga bersama Haromain.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ @$this->actionButton['IsiKonten'] ?? 'https://wa.me/' }}" target="_blank"
-                        class="inline-flex items-center justify-center gap-2.5 bg-white text-amber-600 px-8 py-3.5 rounded-xl font-semibold shadow-md hover:bg-gray-100 transition-all duration-300 hover:scale-105 cursor-pointer">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        class="inline-flex items-center justify-center gap-2.5 bg-amber-400 hover:bg-amber-500 text-white px-8 py-3.5 rounded-xl font-semibold shadow-md transition-all duration-300 hover:scale-105 cursor-pointer">
+                        <svg class="w-5 h-5 fill-white text-white" fill="white" viewBox="0 0 24 24">
                             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                         </svg>
                         <span>Diskusikan Kerja Sama Haromain</span>
