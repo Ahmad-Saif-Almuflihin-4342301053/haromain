@@ -272,31 +272,89 @@
     </section>
 
     <!-- Section 6: Mitra Travel Haromain -->
-    <section class="py-4 md:py-6 bg-white">
+    <section class="py-12 md:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 md:mb-3 text-gray-900">
-                Mitra Travel Haromain
+                {{ @$this->mitraTravelHeader->JudulKonten ?? 'Mitra Travel Haromain' }}
             </h2>
-            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-4 md:mb-6 text-sm md:text-base leading-normal">
-                Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10 md:mb-14 text-sm md:text-base leading-normal">
+                {{ @$this->mitraTravelHeader->IsiKonten ?? 'Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.' }}
             </p>
 
-            <div class="flex justify-center items-center flex-wrap gap-8 md:gap-12">
-                @forelse ($this->mitraTravelList as $mitra)
-                    <div class="flex items-center justify-center">
-                        <img src="{{ asset('assets/konten/' . $mitra['GambarKonten']) }}" 
-                             alt="{{ $mitra['JudulKonten'] }}" 
-                             class="w-48 md:w-64 h-auto object-contain">
-                    </div>
-                @empty
-                    <div class="text-gray-400 text-sm">Belum ada mitra travel terdaftar.</div>
-                @endforelse
-            </div>
+            @php
+                $mitraList = collect($this->mitraTravelList)->take(15);
+                $total = $mitraList->count();
+            @endphp
+
+            @if ($total < 4)
+                <!-- KONDISI 1: LOGO SEDIKIT (1 - 3 LOGO) -> TETAP BESAR & GAGAH SEPERTI AWAL -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 32px 48px; max-width: 1000px; margin: 0 auto;">
+                    @forelse ($mitraList as $mitra)
+                        <div style="min-width: 220px; max-width: 280px; height: 110px; display: flex; align-items: center; justify-content: center; padding: 6px;">
+                            <img src="{{ asset('assets/konten/' . $mitra['GambarKonten']) }}" 
+                                 alt="{{ $mitra['JudulKonten'] }}" 
+                                 style="max-width: 100%; max-height: 90px; width: auto; height: auto; object-fit: contain; display: block;">
+                        </div>
+                    @empty
+                        <div class="text-gray-400 text-sm">Belum ada mitra travel terdaftar.</div>
+                    @endforelse
+                </div>
+            @else
+                <!-- KONDISI 2: LOGO BANYAK (>= 4 LOGO) -> FORMASI WEB SUMMIT RESPONSIF (MAKS 5 KOLOM, MAKS 3 BARIS) -->
+                <style>
+                    .travel-logo-container {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 20px 24px;
+                        width: 100%;
+                        max-width: 1280px;
+                        margin: 0 auto;
+                    }
+                    .travel-logo-item {
+                        box-sizing: border-box;
+                        flex: 0 0 calc(50% - 16px);
+                        max-width: calc(50% - 16px);
+                        height: 80px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 6px;
+                    }
+                    @media (min-width: 640px) {
+                        .travel-logo-item {
+                            flex: 0 0 calc(33.333% - 18px);
+                            max-width: calc(33.333% - 18px);
+                            height: 90px;
+                            padding: 8px;
+                        }
+                    }
+                    @media (min-width: 1024px) {
+                        .travel-logo-item {
+                            flex: 0 0 calc(20% - 20px);
+                            max-width: calc(20% - 20px);
+                            height: 96px;
+                            padding: 8px 12px;
+                        }
+                    }
+                </style>
+
+                <div class="travel-logo-container">
+                    @foreach ($mitraList as $mitra)
+                        <div class="travel-logo-item">
+                            <img src="{{ asset('assets/konten/' . $mitra['GambarKonten']) }}" 
+                                 alt="{{ $mitra['JudulKonten'] }}" 
+                                 style="max-width: 100%; max-height: 72px; width: auto; height: auto; object-fit: contain; display: block;">
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </section>
 
     <!-- Section FAQ -->
-    <section id="faq" class="py-4 md:py-6 bg-white scroll-mt-20">
+    <section id="faq" class="py-12 md:py-16 bg-white scroll-mt-20">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 md:mb-3 text-gray-900">
                 {{ @$this->pertanyaan->JudulKonten ?? 'Pertanyaan Umum' }}

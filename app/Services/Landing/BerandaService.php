@@ -74,6 +74,11 @@ class BerandaService
         return MstKonten::getLandingKondisiPengguna();
     }
 
+    public function getMitraTravelHeader()
+    {
+        return MstKonten::where('JenisKonten', 'LANDING_MITRA_TRAVEL')->where('IsAktif', 1)->first();
+    }
+
     public function getMitraTravelList()
     {
         return MstKonten::getLandingMitraTravelList();

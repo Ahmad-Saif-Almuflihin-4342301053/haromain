@@ -56,14 +56,13 @@
         <!-- Navbar -->
         <nav class="w-full z-50 top-0 start-0 transition-all duration-300 {{ request()->routeIs('home') ? 'fixed bg-transparent' : 'sticky bg-white! border-b border-gray-200' }}"
             x-data="{
-                scrolled: false,
+                scrolled: (window.pageYOffset > 50) || (window.location.hash === '#fitur' || window.location.hash === '#faq'),
                 mobileMenuOpen: false,
-                activeSection: 'home',
+                activeSection: (window.location.hash === '#fitur') ? 'fitur' : ((window.location.hash === '#faq') ? 'faq' : 'home'),
                 updateActive() {
                     if (!{{ $isHome ? 'true' : 'false' }}) return;
                     const faqEl = document.getElementById('faq');
                     const fiturEl = document.getElementById('fitur');
-
                     if (faqEl) {
                         const faqRect = faqEl.getBoundingClientRect();
                         const isBottom = (window.innerHeight + window.pageYOffset) >= (document.documentElement.scrollHeight - 80);
@@ -86,13 +85,37 @@
                     this.activeSection = '';
                 }
             }"
-            x-init="
-                window.addEventListener('scroll', () => {
+            @scroll.window.passive="scrolled = window.pageYOffset > 50; updateActive()"
+            @resize.window.passive="updateActive()"
+            @hashchange.window="
+                setTimeout(() => {
                     scrolled = window.pageYOffset > 50;
                     updateActive();
-                }, { passive: true });
-                window.addEventListener('resize', () => updateActive(), { passive: true });
-                $nextTick(() => updateActive());
+                }, 50)
+            "
+            x-init="
+                scrolled = (window.pageYOffset > 50) || (window.location.hash === '#fitur' || window.location.hash === '#faq');
+                updateActive();
+                $nextTick(() => {
+                    scrolled = (window.pageYOffset > 50) || (window.location.hash === '#fitur' || window.location.hash === '#faq');
+                    updateActive();
+                    setTimeout(() => {
+                        scrolled = window.pageYOffset > 50;
+                        updateActive();
+                    }, 250);
+                    setTimeout(() => {
+                        scrolled = window.pageYOffset > 50;
+                        updateActive();
+                    }, 500);
+                });
+                document.addEventListener('livewire:navigated', () => {
+                    scrolled = window.pageYOffset > 50;
+                    updateActive();
+                    setTimeout(() => {
+                        scrolled = window.pageYOffset > 50;
+                        updateActive();
+                    }, 100);
+                });
             "
             :class="{
                 'bg-white shadow-md': scrolled || mobileMenuOpen,
@@ -106,7 +129,6 @@
                         alt="Haromain Logo" class="h-8 md:h-10 transition-all duration-300"
                         :class="{ 'opacity-80': mobileMenuOpen, 'opacity-100': !mobileMenuOpen }">
                 </a>
-
                 <button @click="mobileMenuOpen = !mobileMenuOpen" type="button"
                     class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none transition-all duration-300"
                     :class="mobileMenuOpen
@@ -121,16 +143,17 @@
                             d="M1 1h15M1 7h15M1 13h15" />
                     </svg>
                 </button>
-
                 <div class="hidden md:flex md:items-center md:space-x-2">
-                    <a href="{{ url('/') }}" wire:navigate class="py-2 px-3 rounded transition-color"
+                    <a href="{{ url('/') }}" wire:navigate
+                        @if ($isHome) @click.prevent="activeSection = 'home'; window.scrollTo({ top: 0, behavior: 'smooth' }); history.pushState(null, '', '{{ url('/') }}')" @endif
+                        class="py-2 px-3 rounded transition-color cursor-pointer"
                         :class="(scrolled || !{{ $isHome ? 'true' : 'false' }}) ?
                         ({{ $isHome ? "activeSection === 'home'" : '$activeHome' }} ? 'text-amber-400! hover:text-amber-400!' : 'text-gray-900! hover:text-amber-400!') :
                         ({{ $isHome ? "activeSection === 'home'" : '$activeHome' }} ? 'text-amber-400! hover:text-amber-400!' : 'text-white! hover:text-amber-400!')">
                         Beranda
                     </a>
                     <a href="{{ $isHome ? '#fitur' : url('/#fitur') }}"
-                        @if ($isHome) @click.prevent="activeSection = 'fitur'; document.getElementById('fitur')?.scrollIntoView({ behavior: 'smooth' })" @endif
+                        @if ($isHome) @click.prevent="activeSection = 'fitur'; scrolled = true; document.getElementById('fitur')?.scrollIntoView({ behavior: 'smooth' })" @endif
                         class="py-2 px-3 rounded transition-color cursor-pointer"
                         :class="(scrolled || !{{ $isHome ? 'true' : 'false' }}) ?
                         ({{ $isHome ? "activeSection === 'fitur'" : 'false' }} ? 'text-amber-400! hover:text-amber-400!' : 'text-gray-900! hover:text-amber-400!') :
@@ -144,7 +167,7 @@
                         Panduan
                     </a>
                     <a href="{{ $isHome ? '#faq' : url('/#faq') }}"
-                        @if ($isHome) @click.prevent="activeSection = 'faq'; document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })" @endif
+                        @if ($isHome) @click.prevent="activeSection = 'faq'; scrolled = true; document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })" @endif
                         class="py-2 px-3 rounded transition-color cursor-pointer"
                         :class="(scrolled || !{{ $isHome ? 'true' : 'false' }}) ?
                         ({{ $isHome ? "activeSection === 'faq'" : 'false' }} ? 'text-amber-400! hover:text-amber-400!' : 'text-gray-900! hover:text-amber-400!') :
@@ -158,7 +181,6 @@
                         Hubungi Kami
                     </a>
                 </div>
-
                 <!-- Mobile menu -->
                 <div x-show="mobileMenuOpen" x-transition:enter="transition-all ease-out duration-500"
                     x-transition:enter-start="opacity-0 scale-95 -translate-y-4"
@@ -169,17 +191,18 @@
                     class="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden z-40"
                     style="will-change: opacity, transform;">
                     <div class="px-2 pt-2 pb-3 space-y-1">
-                        <a href="{{ url('/') }}" wire:navigate @click="mobileMenuOpen = false"
+                        <a href="{{ url('/') }}" wire:navigate
+                            @click="mobileMenuOpen = false; @if ($isHome) activeSection = 'home'; $nextTick(() => window.scrollTo({ top: 0, behavior: 'smooth' })) @endif"
                             class="block px-3 py-2 rounded-md hover:text-amber-400! hover:bg-gray-100 transition-all duration-200"
                             :class="{{ $isHome ? "activeSection === 'home'" : '$activeHome' }} ? 'text-amber-400!' : 'text-gray-900!'">Beranda</a>
                         <a href="{{ $isHome ? '#fitur' : url('/#fitur') }}"
-                            @click="mobileMenuOpen = false; @if ($isHome) activeSection = 'fitur'; $nextTick(() => document.getElementById('fitur')?.scrollIntoView({ behavior: 'smooth' })) @endif"
+                            @click="mobileMenuOpen = false; @if ($isHome) activeSection = 'fitur'; scrolled = true; $nextTick(() => document.getElementById('fitur')?.scrollIntoView({ behavior: 'smooth' })) @endif"
                             class="block px-3 py-2 rounded-md hover:text-amber-400! hover:bg-gray-100 transition-all duration-200"
                             :class="{{ $isHome ? "activeSection === 'fitur'" : 'false' }} ? 'text-amber-400!' : 'text-gray-900!'">Fitur</a>
                         <a href="{{ url('/galeri') }}" wire:navigate @click="mobileMenuOpen = false"
                             class="block px-3 py-2 rounded-md {{ $activeGaleri ? 'text-amber-400!' : 'text-gray-900!' }} hover:text-amber-400! hover:bg-gray-100 transition-all duration-200">Panduan</a>
                         <a href="{{ $isHome ? '#faq' : url('/#faq') }}"
-                            @click="mobileMenuOpen = false; @if ($isHome) activeSection = 'faq'; $nextTick(() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })) @endif"
+                            @click="mobileMenuOpen = false; @if ($isHome) activeSection = 'faq'; scrolled = true; $nextTick(() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })) @endif"
                             class="block px-3 py-2 rounded-md hover:text-amber-400! hover:bg-gray-100 transition-all duration-200"
                             :class="{{ $isHome ? "activeSection === 'faq'" : 'false' }} ? 'text-amber-400!' : 'text-gray-900!'">FAQ</a>
                         <a href="{{ url('/hubungi-kami') }}" wire:navigate @click="mobileMenuOpen = false"

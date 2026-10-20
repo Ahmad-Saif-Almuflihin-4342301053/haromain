@@ -122,9 +122,9 @@
                                                 @endif
                                                 <input type="file" name="GambarKonten" class="dropify" data-height="160"
                                                     data-allowed-file-extensions="jpg jpeg png webp svg"
-                                                    data-max-file-size="3M"
+                                                    data-max-file-size="2M"
                                                     @if (!empty(@$data->GambarKonten)) data-default-file="{{ asset("assets/konten/" . @$data->GambarKonten) }}" @endif />
-                                                <small class="text-muted">Format: JPG, PNG, WEBP, SVG. Maks 3MB.</small>
+                                                <small class="text-muted">Format: JPG, PNG, WEBP, SVG. Maks 2MB.</small>
                                             </div>
                                         </div>
                                     </div>
@@ -204,6 +204,7 @@
                                                                 <input type="file"
                                                                     name="items[{{ $item->IDKonten }}][GambarKonten]"
                                                                     class="dropify" data-height="120"
+                                                                    data-max-file-size="2M"
                                                                     data-allowed-file-extensions="jpg jpeg png webp svg"
                                                                     @if (!empty($item->GambarKonten)) data-default-file="{{ asset("assets/konten/" . $item->GambarKonten) }}" @endif />
                                                                 <small class="text-muted">Format: SVG, PNG, JPG.</small>
@@ -309,6 +310,7 @@
                                                                 <input type="file"
                                                                     name="items[{{ $item->IDKonten }}][GambarKonten]"
                                                                     class="dropify" data-height="160"
+                                                                    data-max-file-size="2M"
                                                                     data-allowed-file-extensions="jpg jpeg png webp svg"
                                                                     @if (!empty($item->GambarKonten)) data-default-file="{{ asset("assets/konten/" . $item->GambarKonten) }}" @endif />
                                                                 <small class="text-muted">Disarankan format landscape
@@ -397,6 +399,7 @@
                                                                 <input type="file"
                                                                     name="items[{{ $item->IDKonten }}][GambarKonten]"
                                                                     class="dropify" data-height="120"
+                                                                    data-max-file-size="2M"
                                                                     data-allowed-file-extensions="jpg jpeg png webp svg"
                                                                     @if (!empty($item->GambarKonten)) data-default-file="{{ asset("assets/konten/" . $item->GambarKonten) }}" @endif />
                                                             </div>
@@ -456,6 +459,7 @@
                                                 @endif
                                                 <input type="file" name="GambarUpload" class="dropify"
                                                     data-height="160"
+                                                    data-max-file-size="2M"
                                                     data-allowed-file-extensions="jpg jpeg png webp svg mp4"
                                                     @if (!empty(@$data->GambarKonten) && strpos(@$data->GambarKonten, "http") === false) data-default-file="{{ asset("assets/konten/" . @$data->GambarKonten) }}" @endif />
                                             </div>
@@ -467,6 +471,23 @@
                                 {{-- SECTION 6: MITRA TRAVEL HAROMAIN --}}
                                 {{-- ========================================================================= --}}
                                 @if ($section === "section-6")
+                                    <div class="card-container mb-4">
+                                        <div class="card-container-header">
+                                            <span><i class="fa fa-pencil-square-o mr-2 text-primary"></i>Keterangan & Deskripsi Seksi Mitra Travel</span>
+                                        </div>
+                                        <div class="card-container-body">
+                                            <div class="form-group">
+                                                <label class="font-weight-bold">Judul Seksi <span class="text-danger">*</span></label>
+                                                <input type="text" name="header_JudulKonten" class="form-control"
+                                                    value="{{ @$header->JudulKonten ?? 'Mitra Travel Haromain' }}" required>
+                                            </div>
+                                            <div class="form-group mb-0">
+                                                <label class="font-weight-bold">Deskripsi / Keterangan Seksi</label>
+                                                <textarea name="header_IsiKonten" class="form-control" rows="3">{{ @$header->IsiKonten ?? 'Bersama mitra travel, Haromain membantu menghadirkan pelayanan Haji dan Umrah yang lebih terintegrasi, profesional, dan terpercaya.' }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="card-container">
                                         <div
                                             class="card-container-header d-flex justify-content-between align-items-center">
@@ -528,8 +549,12 @@
                                                                 <input type="file"
                                                                     name="items[{{ $item->IDKonten }}][GambarKonten]"
                                                                     class="dropify" data-height="120"
+                                                                    data-max-file-size="2M"
                                                                     data-allowed-file-extensions="jpg jpeg png webp svg"
                                                                     @if (!empty($item->GambarKonten)) data-default-file="{{ asset("assets/konten/" . $item->GambarKonten) }}" @endif />
+                                                                <small class="text-muted d-block mt-1">
+                                                                    <i class="mdi mdi-information-outline"></i> Tips: Gunakan format PNG transparan atau crop pas pada tepi logo (rasio landscape) agar tampilan di landing page optimal.
+                                                                </small>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -630,7 +655,11 @@
                     default: 'Drag dan drop gambar di sini atau klik',
                     replace: 'Drag dan drop atau klik untuk mengganti gambar',
                     remove: 'Hapus',
-                    error: 'Oops, terjadi kesalahan.'
+                    error: 'Terjadi kesalahan pada file.'
+                },
+                error: {
+                    'fileSize': 'Ukuran file terlalu besar! Maksimal adalah 2MB.',
+                    'fileExtension': 'Format file tidak diizinkan! Hanya (png, jpg, jpeg, webp, svg).'
                 }
             });
 
@@ -685,8 +714,12 @@
                                 <label class="font-weight-bold">Logo Travel</label>
                                 <input type="file" name="items[${tempId}][GambarKonten]" class="dropify"
                                     data-height="120"
+                                    data-max-file-size="2M"
                                     data-allowed-file-extensions="jpg jpeg png webp svg"
                                 />
+                                <small class="text-muted d-block mt-1">
+                                    <i class="mdi mdi-information-outline"></i> Tips: Gunakan format PNG transparan atau crop pas pada tepi logo (rasio landscape) agar tampilan di landing page optimal.
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -698,7 +731,11 @@
                         default: 'Drag dan drop gambar di sini atau klik',
                         replace: 'Drag dan drop atau klik untuk mengganti gambar',
                         remove: 'Hapus',
-                        error: 'Oops, terjadi kesalahan.'
+                        error: 'Terjadi kesalahan pada file.'
+                    },
+                    error: {
+                        'fileSize': 'Ukuran file terlalu besar! Maksimal adalah 2MB.',
+                        'fileExtension': 'Format file tidak diizinkan! Hanya (png, jpg, jpeg, webp, svg).'
                     }
                 });
                 reindexMitra();

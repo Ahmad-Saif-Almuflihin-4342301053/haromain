@@ -309,7 +309,8 @@ class LandingController extends Controller
         // =========================================================================
         // AGGREGATE 6: SECTION 6 (Mitra Travel Haromain)
         // =========================================================================
-        if (in_array($slug, ['section-6', 'section6', 'landing_mitra_travel_list'])) {
+        if (in_array($slug, ['section-6', 'section6', 'landing_mitra_travel', 'landing_mitra_travel_list'])) {
+            $header = MstKonten::where('JenisKonten', 'LANDING_MITRA_TRAVEL')->first();
             $list = MstKonten::where('JenisKonten', 'LANDING_MITRA_TRAVEL_LIST')
                 ->orderBy('TanggalKonten', 'ASC')
                 ->get();
@@ -318,6 +319,7 @@ class LandingController extends Controller
                 'menu' => 'Manajemen Landing',
                 'section' => 'section-6',
                 'title' => 'Seksi 6: Mitra Travel Haromain',
+                'header' => $header,
                 'list' => $list,
             ]);
         }
@@ -696,7 +698,21 @@ class LandingController extends Controller
 
     protected function simpanSection6(Request $request)
     {
-        // 1. Handle deleted_ids
+        // 1. Simpan data judul dan deskripsi seksi ke JenisKonten 'LANDING_MITRA_TRAVEL'
+        if ($request->filled('header_JudulKonten')) {
+            MstKonten::updateOrCreate(
+                ['JenisKonten' => 'LANDING_MITRA_TRAVEL'],
+                [
+                    'JudulKonten'   => $request->header_JudulKonten,
+                    'IsiKonten'     => $request->header_IsiKonten,
+                    'TanggalKonten' => now()->format('Y-m-d'),
+                    'IsAktif'       => 1,
+                    'Author'        => Auth::user()->name ?? 'Admin',
+                ]
+            );
+        }
+
+        // 2. Handle deleted_ids
         if ($request->filled('deleted_ids')) {
             $delIds = is_array($request->deleted_ids)
                 ? $request->deleted_ids
@@ -732,9 +748,13 @@ class LandingController extends Controller
 
                     if ($request->hasFile("items.$id.GambarKonten")) {
                         $file = $request->file("items.$id.GambarKonten");
+                        if ($file->getSize() > 2048 * 1024) {
+                            throw new \InvalidArgumentException('Ukuran file logo travel terlalu besar! Maksimal 2MB.');
+                        }
                         if ($file->isValid() && in_array(strtolower($file->extension()), ['jpg', 'jpeg', 'png', 'webp', 'svg'])) {
                             $filename = time() . '_' . uniqid() . '.' . $file->extension();
                             $file->move(public_path('assets/konten'), $filename);
+                            $this->autoCropLogoWhitespace(public_path('assets/konten/' . $filename));
                         }
                     }
 
@@ -761,9 +781,13 @@ class LandingController extends Controller
 
                         if ($request->hasFile("items.$id.GambarKonten")) {
                             $file = $request->file("items.$id.GambarKonten");
+                            if ($file->getSize() > 2048 * 1024) {
+                                throw new \InvalidArgumentException('Ukuran file logo travel terlalu besar! Maksimal 2MB.');
+                            }
                             if ($file->isValid() && in_array(strtolower($file->extension()), ['jpg', 'jpeg', 'png', 'webp', 'svg'])) {
                                 $filename = time() . '_' . uniqid() . '.' . $file->extension();
                                 $file->move(public_path('assets/konten'), $filename);
+                                $this->autoCropLogoWhitespace(public_path('assets/konten/' . $filename));
                                 $update['GambarKonten'] = $filename;
                                 if (!empty($item->GambarKonten) && !filter_var($item->GambarKonten, FILTER_VALIDATE_URL)) {
                                     $this->deleteFile('assets/konten/' . $item->GambarKonten, $item->IDKonten);
@@ -1013,5 +1037,44 @@ class LandingController extends Controller
             'recordsFiltered' => $recordsFiltered,
             'data' => $data
         ]);
+    }
+
+    /**
+     * Otomatis memotong (trim) margin putih / transparan berlebih di sekeliling logo travel
+     */
+    protected function autoCropLogoWhitespace($filePath)
+    {
+        if (!file_exists($filePath) || !extension_loaded('gd')) {
+            return;
+        }
+        $info = @getimagesize($filePath);
+        if (!$info) return;
+        $mime = $info['mime'];
+        if ($mime === 'image/jpeg' || $mime === 'image/jpg') {
+            $img = @imagecreatefromjpeg($filePath);
+            if ($img) {
+                $cropped = imagecropauto($img, IMG_CROP_WHITE);
+                if ($cropped !== false) {
+                    imagejpeg($cropped, $filePath, 95);
+                    imagedestroy($cropped);
+                }
+                imagedestroy($img);
+            }
+        } elseif ($mime === 'image/png') {
+            $img = @imagecreatefrompng($filePath);
+            if ($img) {
+                $cropped = imagecropauto($img, IMG_CROP_TRANSPARENT);
+                if ($cropped === false) {
+                    $cropped = imagecropauto($img, IMG_CROP_WHITE);
+                }
+                if ($cropped !== false) {
+                    imagealphablending($cropped, false);
+                    imagesavealpha($cropped, true);
+                    imagepng($cropped, $filePath);
+                    imagedestroy($cropped);
+                }
+                imagedestroy($img);
+            }
+        }
     }
 }

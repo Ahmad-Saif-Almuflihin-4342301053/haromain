@@ -86,6 +86,12 @@ new #[Layout('layouts::landing')] class extends Component {
     }
 
     #[Computed]
+    public function mitraTravelHeader()
+    {
+        return app(BerandaService::class)->getMitraTravelHeader();
+    }
+
+    #[Computed]
     public function mitraTravelList()
     {
         return app(BerandaService::class)->getMitraTravelList();
