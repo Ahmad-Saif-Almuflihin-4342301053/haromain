@@ -10,6 +10,8 @@
         @vite(["resources/css/app.css", "resources/js/app.js"])
         @livewireStyles
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+
+        @include('layouts.partials.google-tag')
     </head>
 
     <body class="antialiased">
@@ -349,6 +351,13 @@
                     setTimeout(function() {
                         loader.style.display = 'none';
                     }, 500);
+                }
+
+                // Track page view on Livewire navigation
+                if (typeof gtag === 'function') {
+                    gtag('config', 'AW-17481952180', {
+                        'page_path': window.location.pathname
+                    });
                 }
             });
         </script>

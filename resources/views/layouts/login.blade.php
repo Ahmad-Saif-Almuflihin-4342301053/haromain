@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/sweetalert2.min.css?v=' . $version) }}">
 
     @stack('css')
+    @include('layouts.partials.google-tag')
 </head>
 
 <body class="bg-cover"

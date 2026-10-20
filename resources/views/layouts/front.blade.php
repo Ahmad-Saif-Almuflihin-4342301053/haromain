@@ -29,6 +29,7 @@
 
     <script src="{{ asset('assets/front-page/js/modernizr.js') }}" defer></script>
     <script src="{{ asset('assets/front-page/js/jquery-1.11.0.min.js') }}"></script>
+    @include('layouts.partials.google-tag')
 </head>
 
 <body>
