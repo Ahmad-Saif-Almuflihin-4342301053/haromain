@@ -565,6 +565,51 @@
                                 @endif
 
                                 {{-- ========================================================================= --}}
+                                {{-- SECTION 7: FINAL CTA BANNER --}}
+                                {{-- ========================================================================= --}}
+                                @if ($section === "section-7")
+                                    <div class="card-container">
+                                        <div class="card-container-header">
+                                            <span><i class="fa fa-bullhorn mr-2 text-primary"></i>Pengaturan Banner Ajakan (CTA Penutup)</span>
+                                        </div>
+                                        <div class="card-container-body">
+                                            <div class="form-group">
+                                                <label class="font-weight-bold">Judul Utama CTA <span class="text-danger">*</span></label>
+                                                <input type="text" name="cta_judul" class="form-control" required
+                                                    value="{{ $ctaHeader->JudulKonten ?? 'Tingkatkan Pelayanan, Tumbuhkan Kepercayaan Jamaah' }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="font-weight-bold">Deskripsi / Sub-Judul CTA <span class="text-danger">*</span></label>
+                                                <textarea name="cta_deskripsi" class="form-control summernote" rows="3" required>{{ $ctaHeader->IsiKonten ?? 'Hadirkan pelayanan digital yang terintegrasi untuk travel, Tour Leader/Mutowif, jamaah, dan keluarga bersama Haromain.' }}</textarea>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold">Teks Tombol CTA <span class="text-danger">*</span></label>
+                                                        @php
+                                                            $currentBtnLabel = $actionBtn->JudulKonten ?? 'Diskusikan Kerja Sama Haromain';
+                                                            if ($currentBtnLabel === 'Tombol Konsultasi CTA') {
+                                                                $currentBtnLabel = 'Diskusikan Kerja Sama Haromain';
+                                                            }
+                                                        @endphp
+                                                        <input type="text" name="btn_label" class="form-control" required
+                                                            value="{{ $currentBtnLabel }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="font-weight-bold">Link Tujuan Tombol (WhatsApp / URL) <span class="text-danger">*</span></label>
+                                                        <input type="url" name="btn_url" class="form-control" required
+                                                            value="{{ $actionBtn->IsiKonten ?? 'https://wa.me/6287777235337' }}">
+                                                        <small class="text-muted">Contoh: https://wa.me/6287777235337</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                {{-- ========================================================================= --}}
                                 {{-- GLOBAL SETTING: FOOTER & KONTAK --}}
                                 {{-- ========================================================================= --}}
                                 @if ($section === "global-setting")

@@ -152,8 +152,15 @@ class LandingController extends Controller
                 'types' => ['LANDING_MITRA_TRAVEL_LIST'],
                 'slug' => 'section-6'
             ],
-            'footer' => [
+            'section-7' => [
                 'no' => 7,
+                'name' => 'Section 7 (Banner Ajakan / CTA Penutup)',
+                'description' => 'Judul ajakan kerja sama, deskripsi penutup, dan tombol WhatsApp CTA',
+                'types' => ['LANDING_CARA_MEMULAI', 'LANDING_ACTION_BUTTON'],
+                'slug' => 'section-7'
+            ],
+            'footer' => [
+                'no' => 8,
                 'name' => 'Footer & Kontak Global',
                 'description' => 'WhatsApp Konsultasi, Email, Akun Medsos, & Tautan Aplikasi',
                 'types' => ['LANDING_GLOBAL_SETTING'],
@@ -190,6 +197,9 @@ class LandingController extends Controller
             } elseif ($slug === 'section-6') {
                 $count = $rows->count();
                 $preview = "{$count} Mitra Travel Terdaftar";
+            } elseif ($slug === 'section-7') {
+                $ctaHeader = $rows->where('JenisKonten', 'LANDING_CARA_MEMULAI')->first();
+                $preview = $ctaHeader ? $ctaHeader->JudulKonten : 'Tingkatkan Pelayanan, Tumbuhkan Kepercayaan Jamaah';
             } elseif ($slug === 'footer') {
                 $setting = app(\App\Services\Landing\BerandaService::class)->getGlobalSetting();
                 $preview = 'WhatsApp: ' . ($setting['WhatsAppText'] ?? $setting['WhatsApp'] ?? '-') . ' | ' . ($setting['Email'] ?? '-');
@@ -325,9 +335,24 @@ class LandingController extends Controller
         }
 
         // =========================================================================
-        // AGGREGATE 7: GLOBAL SETTING (Footer & Kontak)
+        // AGGREGATE 7: SECTION 7 (Final CTA Banner)
         // =========================================================================
-        if (in_array($slug, ['footer', 'section-7', 'section7', 'global-setting', 'global_setting', 'landing_global_setting'])) {
+        if (in_array($slug, ['section-7', 'section7', 'landing_cara_memulai', 'landing_action_button'])) {
+            $ctaHeader = MstKonten::where('JenisKonten', 'LANDING_CARA_MEMULAI')->first();
+            $actionBtn = MstKonten::where('JenisKonten', 'LANDING_ACTION_BUTTON')->first();
+            return view('admin-page.landing.edit-section', [
+                'menu' => 'Manajemen Landing',
+                'section' => 'section-7',
+                'title' => 'Seksi 7: Banner Ajakan / CTA Penutup',
+                'ctaHeader' => $ctaHeader,
+                'actionBtn' => $actionBtn,
+            ]);
+        }
+
+        // =========================================================================
+        // AGGREGATE 8: GLOBAL SETTING (Footer & Kontak)
+        // =========================================================================
+        if (in_array($slug, ['footer', 'global-setting', 'global_setting', 'landing_global_setting'])) {
             $row = MstKonten::where('JenisKonten', 'LANDING_GLOBAL_SETTING')->first();
             $setting = [];
             if ($row && !empty($row->IsiKonten)) {
@@ -423,9 +448,11 @@ class LandingController extends Controller
                 case 'section-6':
                     $this->simpanSection6($request);
                     break;
+                case 'section-7':
+                    $this->simpanSection7($request);
+                    break;
                 case 'footer':
                 case 'global-setting':
-                case 'section-7':
                     $this->simpanGlobalSetting($request);
                     break;
                 default:
@@ -802,6 +829,49 @@ class LandingController extends Controller
         }
 
         $this->serverlog->insertLog('SECTION-6', 'Edit', 'Landing Seksi 6');
+    }
+
+    protected function simpanSection7(Request $request)
+    {
+        // 1. Simpan Judul & Deskripsi Banner CTA ke LANDING_CARA_MEMULAI
+        $ctaHeader = MstKonten::where('JenisKonten', 'LANDING_CARA_MEMULAI')->lockForUpdate()->first();
+        if ($ctaHeader) {
+            $ctaHeader->update([
+                'JudulKonten' => $request->cta_judul ?? 'Tingkatkan Pelayanan, Tumbuhkan Kepercayaan Jamaah',
+                'IsiKonten'   => $request->cta_deskripsi ?? '',
+                'TanggalKonten' => now()->format('Y-m-d'),
+            ]);
+        } else {
+            MstKonten::create([
+                'IDKonten'      => $this->konten->generateID(),
+                'JudulKonten'   => $request->cta_judul ?? 'Tingkatkan Pelayanan, Tumbuhkan Kepercayaan Jamaah',
+                'IsiKonten'     => $request->cta_deskripsi ?? '',
+                'JenisKonten'   => 'LANDING_CARA_MEMULAI',
+                'TanggalKonten' => now()->format('Y-m-d'),
+                'IsAktif'       => 1,
+                'Author'        => Auth::user()->name ?? 'Admin',
+            ]);
+        }
+        // 2. Simpan Label Tombol & Link WA ke LANDING_ACTION_BUTTON
+        $actionBtn = MstKonten::where('JenisKonten', 'LANDING_ACTION_BUTTON')->lockForUpdate()->first();
+        if ($actionBtn) {
+            $actionBtn->update([
+                'JudulKonten'   => $request->btn_label ?? 'Diskusikan Kerja Sama Haromain',
+                'IsiKonten'     => $request->btn_url ?? 'https://wa.me/6287777235337',
+                'TanggalKonten' => now()->format('Y-m-d'),
+            ]);
+        } else {
+            MstKonten::create([
+                'IDKonten'      => $this->konten->generateID(),
+                'JudulKonten'   => $request->btn_label ?? 'Diskusikan Kerja Sama Haromain',
+                'IsiKonten'     => $request->btn_url ?? 'https://wa.me/6287777235337',
+                'JenisKonten'   => 'LANDING_ACTION_BUTTON',
+                'TanggalKonten' => now()->format('Y-m-d'),
+                'IsAktif'       => 1,
+                'Author'        => Auth::user()->name ?? 'Admin',
+            ]);
+        }
+        $this->serverlog->insertLog('SECTION-7', 'Edit', 'Landing Seksi 7 CTA');
     }
 
     protected function simpanGlobalSetting(Request $request)
