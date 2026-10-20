@@ -394,11 +394,11 @@
     <!-- Section 7: Final CTA Banner -->
     <section class="pt-2 pb-8 md:pt-4 md:pb-12 bg-white">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="bg-linear-to-r from-amber-400 to-amber-500 rounded-3xl p-6 md:p-8 text-center shadow-xl">
+            <div class="bg-white rounded-3xl p-8 md:p-12 text-center shadow-2xl border border-gray-100">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-2 md:mb-3 text-gray-900">
                     Tingkatkan Pelayanan, Tumbuhkan Kepercayaan Jamaah
                 </h2>
-                <p class="text-white/95 text-base md:text-lg max-w-2xl mx-auto mb-6 leading-normal">
+                <p class="text-gray-600 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-normal">
                     Hadirkan pelayanan digital yang terintegrasi untuk travel, Tour Leader/Mutowif, jamaah, dan keluarga bersama Haromain.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
